@@ -1,23 +1,20 @@
 <?php
 
-namespace App\Models;
-use App\Domains\SimCard\Models\SimCard;
+namespace App\Domains\User\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-/**
- * User
- */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFActory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * the attributes are mass assignable.
      *
-     * @var array<int, string>
+     * @var string[]
      */
     protected $fillable = [
         'name',
@@ -27,9 +24,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * attributes that should be hiden for serialization
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -39,12 +36,13 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function simcards(){
-        return $this->hasMany(SimCard::class,'user_id');
-    }
+
+    const USER_ROLE_ADMIN = 1;
+    const USER_ROLE_MANAGER = 2;
+    const USER_ROLE_CUSTOMER = 3;
 }
