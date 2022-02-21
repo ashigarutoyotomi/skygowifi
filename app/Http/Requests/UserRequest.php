@@ -30,7 +30,8 @@ class UserRequest extends FormRequest
             'last_name' => 'required|string',
             'email' => 'required|string',
             'address' => 'nullable|string',
-            'role' => 'nullable|integer'
+            'role' => 'required|integer',
+            'password'=>'nullable|string',
         ];
     }    
 }

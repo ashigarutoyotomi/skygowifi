@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFActory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * the attributes are mass assignable.
@@ -22,7 +22,9 @@ class User extends Authenticatable
         'last_name',
         'role',
         'address',
-        'phone_number'
+        'phone_number',
+        'password',
+        'id'
     ];
 
     /**
@@ -44,7 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    const USER_ROLE_ADMIN = 1;
-    const USER_ROLE_MANAGER = 2;
-    const USER_ROLE_CUSTOMER = 3;
+    const USER_ROLE_USER= 1;
+    const USER_ROLE_DEALER = 2;
+    const USER_ROLE_ADMIN = 3;
+    const USER_ROLE_SUPERADMIN = 999;
 }

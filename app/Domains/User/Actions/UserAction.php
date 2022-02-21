@@ -23,19 +23,25 @@ class UserAction
             'role' => $data->role,
             'address'=>$data->address,
             'phone_number'=>$data->phone_number,
+            'password' => Hash::make($data->password),
         ]);
     }
 
-    public function update(UpdateUserData $data)
+    public function update(UpdateUserData $data,$userId)
     {
-        $user = User::find($data->id);
-        abort_unless((bool)$user, 404, 'user not found');
+        $oldUser = User::find($userId);
+        $user = User::find($userId);
         $user->first_name = $data->first_name;
         $user->last_name = $data->last_name;
         $user->email = $data->email;
         $user->address = $data->address;
         $user->role = $data->role;
         $user->phone_number = $data->phone_number;
+        if(!empty($data->password)){
+            $user->password= Hash::make($data->password);
+        }else {
+            $user->password = $oldUser->password;
+        }
         $user->save();
         return $user;
     }

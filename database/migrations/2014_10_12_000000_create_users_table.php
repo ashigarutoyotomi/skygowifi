@@ -20,11 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('phone_number');
             $table->string('email')->unique();
             $table->string('address')->nullable();
+            $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             //role: 1 - user,2- dealer, 3-admin, 999 - super admin
-            $table->integer("role")->default(1);
+            $table->integer("role");
         });
     }
 
