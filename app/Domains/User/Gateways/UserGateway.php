@@ -28,4 +28,13 @@ class UserGateway
 
         return $query->get();
     }
+    public function show($id){
+        $user = User::find($id);
+        return $user;
+
+    }
+    public function edit($id){
+        $user = User::findOrFail($id);
+        return $user;
+    }
 }

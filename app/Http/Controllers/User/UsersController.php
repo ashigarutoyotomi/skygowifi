@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Requests\UserRequest;
 class UsersController extends Controller
 {
     /**
@@ -48,20 +48,23 @@ class UsersController extends Controller
         return $users;
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|max:50',
-            'role' => 'required|int'
-        ]);
+$validated = $request->validated();
+        // $validated = $request->validate([
+        //     'name' => 'required|string|max:100',
+        //     'email' => 'required|email|unique:users',
+        //     'password' => 'required|string|max:50',
+        //     'role' => 'required|int'
+        // ]);
 
         $data = new CreateUserData([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => (int)$request->role
+            'last_name' => $request->last_name,
+            'role' => (int)$request->role,
+            'phone_number'=>$request->phone_number,
+            'address' => $request->address
         ]);
 
         $user = (new UserAction)->create($data);
@@ -69,41 +72,49 @@ class UsersController extends Controller
         return $user;
     }
 
-    public function show(Request $request, $userId)
+    public function show($userId)
     {
-        $user = User::find($userId);
+        $user = UserGateway::show($userId);
         abort_unless((bool)$user, 404, 'user not found');
         return $user;
     }
 
-    public function edit(Request $request, $userId)
+    public function edit( $userId)
     {
-        $user = User::find($userId);
+        $user = UserGateway::edit($userId);
         abort_unless((bool)$user, 404, 'user not found');
-        return response()->json([
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'role' => $user->role
-        ]);
+        return $user;
+        // return response()->json([
+        //     'id' => $user->id,
+        //     'first_name' => $user->first_name,
+        //     'email' => $user->email,
+        //     'role' => $user->role,
+        //     'address'=>$user->address,
+        //     'last_name'=>$user->last_name,
+        //     'phone_number'=>$user->phone_number,
+        // ]);
     }
 
-    public function update(Request $request, $userId)
+    public function update(UserRequest $request, $userId)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'password' => 'nullable|string',
-            'email' => 'required|email|unique:users,email,' . $userId,
-            'role' => 'required|integer'
-        ]);
+        // $validated = $request->validate([
+        //     'name' => 'required|string',
+        //     'password' => 'nullable|string',
+        //     'email' => 'required|email|unique:users,email,' . $userId,
+        //     'role' => 'required|integer'
+        // ]);
+        $validated = $request->validated();
         $oldUser = User::find($userId);
         abort_unless((bool)$oldUser, 404, 'user not found');
+
         $data = new UpdateUserData([
-            'name' => $request->name,
-            'password' => !empty($request->password) ? Hash::make($request->password) : $oldUser->password,
+            'first_name' => $request->first_name,            
             'email' => $request->email,
             'role' => (int)$request->role,
-            'id' => (int)$userId
+            'id' => (int)$userId,
+            'last_name'=>$request->last_name,
+            'phone_number'=>$request->phone_number,
+            'address'=>$request->address
         ]);
 
         $user = (new UserAction)->update($data);
