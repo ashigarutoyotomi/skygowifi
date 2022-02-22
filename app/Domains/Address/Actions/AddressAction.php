@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Domains\Address\Actions;
+
+use App\Domains\Address\DTO\Address\CreateAddressData;
+use App\Domains\Address\DTO\Address\UpdateAddressData;
+use App\Domains\Address\Models\Address;
+class AddressAction
+{
+    /**
+     * create user
+     * @param CreateAddressData $data
+     * @return mixed
+     */
+    public function create(CreateAddressData $data)
+    {
+        return Address::create([
+            'city_id' => $data->city_id,
+            'hours_of_operations' => $data->hours_of_operations,
+            'text' => $data->text,
+        ]);
+    }
+
+    public function update(UpdateAddressData $data)
+    {
+        $address = Address::find($data->id);
+        abort_unless((bool)$address, 404, 'address not found');
+
+        $address->text = $data->text;
+        $address->hours_of_operations = $data->hours_of_operations;
+        $address->id = $data->id;
+
+        $address->save();
+
+        return $address;
+    }
+}
