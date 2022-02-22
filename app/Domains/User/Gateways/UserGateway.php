@@ -15,7 +15,7 @@ class UserGateway
      */
     public static function appendFilters($filters)
     {
-        $query = User::query();
+        
         if (array_key_exists('start_created_at', $filters)) {
             $query->where('created_at', '>=', $filters['start_created_at']);
         }
