@@ -11,7 +11,8 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 class UsersController extends Controller
 {
     /**
@@ -21,30 +22,21 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        if(empty($request->filters)&& empty($request->keywords)){
-            $users = UserGateway::all();
-            return $users;
+        $query = User::query();
+        
+        $filters = json_decode($request->get('filters'),true);
+        if(!empty($request->filters)){
+                $query = UserGateway::appendFilters($filters,$query);
         }
-        else{
-            $filters = json_decode($request->get('filters'),true);  
-            $query = User::query();   ;      
-            if(!empty($request->filters)){
-                if (!empty($filters['start_created_date'])) {
-                    $query->where('created_at', '>=', $filters['start_created_date']);
-                }
-                if (!empty($filters['end_created_date'])) {
-                    $query->where('created_at', '<=',  $filters['end_created_date']);
-                }
-            }
-            if(!empty($request->keywords)){
-                $query->where('first_name', '%LIKE%', $filters['first_name'])->where('last_name', '%LIKE%', $filters['last_name']);
-            }            
+        if(!empty($request->keywords)){
+                $query = UserGateway::setSearch($request->keywords,['first_name','last_name']);                
+                   
         } 
         $users = $query->get();
         return $users;
     }
 
-    public function store(UserRequest $request)
+    public function store(CreateUserRequest $request)
     {
         
         
@@ -65,14 +57,13 @@ class UsersController extends Controller
     public function edit( $userId)
     {
         $user = UserGateway::edit($userId);
-        abort_unless((bool)$user, 404, 'user not found');
+        abort_unless((bool)$user, 404, 'User not found');
         return $user;        
     }
 
-    public function update(UserRequest $request, $userId)
+    public function update(UpdateUserRequest $request, $userId)
     {
-        $user = User::find($userId);
-        abort_unless((bool)$user, 404, 'user not found');
+        $user = UserAction::find($userId);        
 
         $data = (UpdateUserData::fromRequest($request));
 
@@ -83,9 +74,7 @@ class UsersController extends Controller
 
     public function delete($userId)
     {
-        $user = UserGateway::find($userId);
-        abort_unless((bool)$user,404,'User not found');
-        $user->delete();
+        $user = UserAction::delete($userId);
         return $user;
     }
 }

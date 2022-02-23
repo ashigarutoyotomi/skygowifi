@@ -16,7 +16,7 @@ class UpdateUserData extends DataTransferObject
     public string $password;
 
     public static function fromRequest(
-    UserRequest $request) : UpdateUserData {
+    UserRequest $request,$user_id) : UpdateUserData {
     $data = [
         'first_name' => $request->get('first_name'),
         'last_name' => $request->get('last_name'),
@@ -26,7 +26,7 @@ class UpdateUserData extends DataTransferObject
         'role'=>$request->get('role'),
         'password'=>$request->get('password'),
         'role'=>(int)$request->get('role'),
-        'id'=>(int)$request->get('id'),
+        'id'=>$user_id,
     ];        
     return new self($data);
 }

@@ -9,18 +9,17 @@ class UserGateway
 {
     use BasicGatewaysTrait;
     /**
-     * Get all users
+     * get users by set filters
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public static function appendFilters($filters)
+    public static function appendFilters($filters,$query)
     {
-        
-        if (array_key_exists('start_created_at', $filters)) {
+        if (!empty($filters['start_created_at'])) {
             $query->where('created_at', '>=', $filters['start_created_at']);
         }
 
-        if (array_key_exists('end_created_at', $filters)) {
+        if (!empty($filters['end_created_at'])) {
             $query->where('created_at', '<=',  $filters['end_created_at']);
         }
         return $query;
@@ -30,11 +29,11 @@ class UserGateway
         return User::all(); 
     }
 
-    public function setSearch($query,$keywords){
-        $query->where('first_name', 'like', '%' . $keywords. '%')
-        ->orWhere('last_name', 'like', '%' . $keywords. '%');
-        return $query;
-    }
+    // public function setSearch($query,$keywords){
+    //     $query->where('first_name', 'like', '%' . $keywords. '%')
+    //     ->orWhere('last_name', 'like', '%' . $keywords. '%');
+    //     return $query;
+    // }
 
     public function show($id){
         $user = User::find($id);

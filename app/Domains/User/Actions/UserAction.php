@@ -29,20 +29,26 @@ class UserAction
 
     public function update(UpdateUserData $data,$userId)
     {
-        $oldUser = User::find($userId);
         $user = User::find($userId);
+        abort_unless((bool)$user,404,"User not found");
         $user->first_name = $data->first_name;
         $user->last_name = $data->last_name;
         $user->email = $data->email;
         $user->address = $data->address;
         $user->role = $data->role;
         $user->phone_number = $data->phone_number;
-        if(!empty($data->password)){
-            $user->password= Hash::make($data->password);
+        if(empty($data->password)){
+            ;
         }else {
-            $user->password = $oldUser->password;
+            $user->password= Hash::make($data->password);
         }
         $user->save();
+        return $user;
+    }
+    public function delete($user_id){
+        $user = User::find($user_id);
+        abort_unless((bool)$user,404,'User not found');
+        $user->delete();
         return $user;
     }
 }
