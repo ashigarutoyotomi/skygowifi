@@ -2,8 +2,8 @@
 
 namespace App\Domains\Address\Actions;
 
-use App\Domains\Address\DTO\Address\CreateAddressData;
-use App\Domains\Address\DTO\Address\UpdateAddressData;
+use App\Domains\Address\DTO\AddressDTO\CreateAddressData;
+use App\Domains\Address\DTO\AddressDTO\UpdateAddressData;
 use App\Domains\Address\Models\Address;
 class AddressAction
 {

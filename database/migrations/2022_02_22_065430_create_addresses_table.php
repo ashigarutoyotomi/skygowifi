@@ -20,6 +20,8 @@ class CreateAddressesTable extends Migration
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities');
             $table->integer('hours_of_operations')->nullable();
+
+            $table->on('cities')->onDelete('cascade');
         });
     }
 

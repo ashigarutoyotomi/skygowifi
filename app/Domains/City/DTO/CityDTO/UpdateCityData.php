@@ -8,5 +8,4 @@ class UpdateCityData extends DataTransferObject
 {
     public string $name;
     public int $country_id;
-    public int $id;
 }
