@@ -26,7 +26,7 @@ class UsersController extends Controller
         
         $filters = json_decode($request->get('filters'),true);
         if(!empty($request->filters)){
-                $query = UserGateway::appendFilters($filters,$query);
+                $query = UserGateway::appendFilters($filters);
         }
         if(!empty($request->keywords)){
                 $query = UserGateway::setSearch($request->keywords,['first_name','last_name']);                
