@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Addresses\Models;
+namespace App\Domains\City\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Domains\Countries\Models\Country;
 use App\Domains\Addresses\Models\Address;

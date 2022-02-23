@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Country\DTO\Country;
+namespace App\Domains\Country\DTO\CountryDTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
 

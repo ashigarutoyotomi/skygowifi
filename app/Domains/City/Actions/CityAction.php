@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domains\User\Actions;
+namespace App\Domains\City\Actions;
 use App\Domains\City\DTO\CityDTO\CreateCityData;
 use App\Domains\City\DTO\CityDTO\UpdateCityData;
-
+use App\Domains\City\Models\City;
 class CityAction
 {
     /**
@@ -22,7 +22,7 @@ class CityAction
     public function update(UpdateCityData $data)
     {
         $city = City::find($data->id);
-        abort_unless((bool)$city, 404, 'city not found');
+        abort_unless((bool)$city, 404, 'City not found');
 
         $city->country_id = $data->country_id;
         $city->name = $data->name;

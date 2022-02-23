@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Address\DTO\Address;
+namespace App\Domains\Address\DTO\AddressDTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
 

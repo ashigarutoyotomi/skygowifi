@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Domains\Country\Actions\CountryAction;
-use App\Domains\Country\DTO\Country\CreateCountryData;
-use App\Http\Requests\UpdateCountryRequest;
+use App\Domains\Country\DTO\CountryDTO\CreateCountryData;
+use App\Http\Requests\UpdateCountriesRequest;
 use App\Domains\Country\Gateways\CountryGateway;
 use App\Domains\Country\Models\Country;
-use App\Http\Requests\CountryRequest;
-use App\Domains\Country\DTO\Country\UpdateCountryData;
+use App\Http\Requests\CountriesRequest;
+use App\Domains\Country\DTO\CountryDTO\UpdateCountryData;
 
 class CountriesController extends Controller
 {
@@ -17,7 +17,7 @@ class CountriesController extends Controller
     {
         if (empty($request->keywords)) {
             $countries = CountryGateway::all();
-            return $addresses;
+            return $countries;
         }
         $query = Country::query();
         $query = CountryGateway::setSearch($request->keywords, $query);
@@ -34,19 +34,19 @@ class CountriesController extends Controller
         $country_id = CountryGateway::show($country_id);
         return $country_id;
     }
-    public function store(CountryRequest $request)
+    public function store(CountriesRequest $request)
     {
         $data = new CreateCountryData([
-            'name' => $request->text,
+            'name' => $request->name,
         ]);
 
         return (new CountryAction)->create($data);
     }
-    public function update(UpdateCountryRequest $request, $country_id)
+    public function update(UpdateCountriesRequest $request, $country_id)
     {
         $data = new UpdateCountryData([
             'name' => $request->name,
-            'id' => (int)$id,
+            'id' => (int)$request->id,
         ]);
         
         return (new CountryAction)->update($data);;

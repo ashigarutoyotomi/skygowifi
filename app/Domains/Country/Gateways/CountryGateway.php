@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\User\Gateways;
+namespace App\Domains\Country\Gateways;
 
-use App\Domains\Coutries\Models\Country;
+use App\Domains\Country\Models\Country;
 use App\Traits\BasicGatewaysTrait;
 class CountryGateway
 {
@@ -13,7 +13,7 @@ class CountryGateway
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function all(int $country_id)
+    public function all()
     {
         $query = Country::query();
         return $query->get();

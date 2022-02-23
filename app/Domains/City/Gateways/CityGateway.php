@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\User\Gateways;
+namespace App\Domains\City\Gateways;
 
-use App\Domains\Cities\Models\City;
+use App\Domains\City\Models\City;
 use App\Traits\BasicGatewaysTrait;
 
 class CityGateway
@@ -16,20 +16,22 @@ class CityGateway
      */
     public function all()
     {
-        $query = Cities::query();
+        $query = City::query();
         return $query->get();
     }
 
-    public function setSearch($keyword){
-        $query = City::query();
-        $query->where('name',"%LIKE%",$keyword);
+    public function setSearch($keyword, $query)
+    {
+        $query->where('name', "%LIKE%", $keyword);
         return $query;
     }
-    public function show($city_id){
+    public function show($city_id)
+    {
         $city = City::find($city_id);
         return $city;
     }
-    public function edit($city_id){
+    public function edit($city_id)
+    {
         $city = City::find($city_id);
         return $city;
     }

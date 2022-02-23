@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Domains\User\Actions;
-
+namespace App\Domains\Country\Actions;
+use App\Domains\Country\Models\Country;
 use App\Domains\Country\DTO\CountryDTO\CreateCountryData;
 use App\Domains\Country\DTO\CountryDTO\UpdateCountryData;
 
@@ -14,9 +14,8 @@ class CountryAction
      */
     public function create(CreateCountryData $data)
     {
-        return User::create([
-            'name' => $data->name,
-            'id' => $data->id
+        return Country::create([
+            'name' => $data->name
         ]);
     }
 

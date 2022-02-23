@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Domains\Address\Actions\AddressAction;
-use App\Domains\Address\DTO\Address\CreateAddressData;
+use App\Domains\Address\DTO\AddressDTO\CreateAddressData;
 use App\Http\Requests\UpdateAddressRequest;
 use App\Domains\Address\Gateways\AddressGateway;
 use App\Domains\Address\Models\Address;
 use App\Http\Requests\AddressRequest;
 use Illuminate\Http\Request;
-use App\Domains\Address\DTO\Address\UpdateAddressData;
+use App\Domains\Address\DTO\AddressDTO\UpdateAddressData;
 
 class AddressesController extends Controller
 {
