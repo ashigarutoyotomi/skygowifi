@@ -49,4 +49,8 @@ class UserAction
         $user->delete();
         return $user;
     }
+    public function find($user_id){
+        $user = User::find($user_id);
+        return $user;
+    }
 }

@@ -22,24 +22,22 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Gateway::all();
+        $gateway = new UserGateway();
         
         $filters = json_decode($request->get('filters'),true);
-        if(!empty($request->filters)){
-                $query = UserGateway::appendFilters($filters);
+        if(!empty($filters)){
+                $gateway->setFilters($filters);
         }
-        if(!empty($request->keywords)){
-                $query = UserGateway::setSearch($request->keywords,['first_name','last_name','email']);                
-                   
+        $keywords =$request->get('keywords');
+        if($keywords){
+                $gateway->setSearch($keywords,['first_name','last_name','email']); 
         } 
-        $users = $query->get();
+        $users = $gateway->all();
         return $users;
     }
 
     public function store(CreateUserRequest $request)
-    {
-        
-        
+    {        
         $data = CreateUserData::fromRequest(($request));
 
         $user = (new UserAction)->create($data);

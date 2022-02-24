@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Traits;
-
 use App\Classes\Helpers\StringHelper;
 
 trait BasicGatewaysTrait
