@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Traits;
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 use App\Classes\Helpers\StringHelper;
 
 trait BasicGatewaysTrait
