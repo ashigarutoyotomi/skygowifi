@@ -8,7 +8,7 @@ class CityAction
 {
     /**
      * create user
-     * @param CreateUserData $data
+     * @param CreateCityData $data
      * @return mixed
      */
     public function create(CreateCityData $data)

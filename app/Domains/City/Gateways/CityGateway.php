@@ -16,8 +16,15 @@ class CityGateway
      */
     public function all()
     {
-        $query = City::query();
-        return $query->get();
+        $query = City::query();        
+        if ($this->search['keywords'] && count($this->search['columns'])) {
+            $this->appendSearch($query);
+        }
+        
+        if(count($this->filters)){
+            $query = $this->appendFilters($query);
+        }
+        return $query->get(); 
     }
    
     public function show($city_id)

@@ -15,14 +15,18 @@ class CitiesController extends Controller
 {
     public function index(Request $request)
     {
-        if (empty($request->keywords)) {
-            $cities = CityGateway::all();
-            return $cities;
+        $gateway = new CityGateway();
+        
+        $filters = json_decode($request->get('filters'),true);
+        if(!empty($filters)){
+                $gateway->setFilters($filters);
         }
-        $query = City::query();
-        $query = CityGateway::setSearch($request->keywords, $query);
-        $cities = $query->get();
-        return $cities;
+        $keywords =$request->get('keywords');
+        if($keywords){
+                $gateway->setSearch($keywords,['name']); 
+        } 
+        $addresses = $gateway->all();
+        return $addresses;
     }
     public function edit($city_id)
     {
