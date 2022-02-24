@@ -18,9 +18,7 @@ use App\Http\Controllers\CitiesController;
 
 Route::middleware('auth:sanctum')->group(function(){
 
-});
-
-//addresses
+    //addresses
 Route::group(['prefix' => 'addresses'], function () {
     Route::get('/', [AddressesController::class, 'index']);
     Route::post('/store', [AddressesController::class, 'store']);
@@ -48,4 +46,5 @@ Route::group(['prefix' => 'cities'], function () {
     Route::get('/{id}/show', [CitiesController::class, 'show']);
     Route::get('/{id}/edit', [CitiesController::class, 'edit']);
     Route::delete('/{id}/delete', [CitiesController::class, 'delete']);
+});
 });

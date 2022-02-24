@@ -18,12 +18,7 @@ class CountryGateway
         $query = Country::query();
         return $query->get();
     }
-
-    public function setSearch($keyword){
-        $query = Country::query();
-        $query->where('name',"%LIKE%",$keyword);
-        return $query;
-    }
+   
 public function show ($country_id){
     $country = Country::find($country_id);
     return $country;

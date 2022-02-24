@@ -24,7 +24,6 @@ class UpdateAddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'required|integer',
             'city_id'=>'required|integer',
             'text'=>'required|string',
             'hours_of_operations'=>'nullable|integer'

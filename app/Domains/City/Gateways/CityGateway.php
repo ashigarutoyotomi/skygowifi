@@ -19,12 +19,7 @@ class CityGateway
         $query = City::query();
         return $query->get();
     }
-
-    public function setSearch($keyword, $query)
-    {
-        $query->where('name', "%LIKE%", $keyword);
-        return $query;
-    }
+   
     public function show($city_id)
     {
         $city = City::find($city_id);

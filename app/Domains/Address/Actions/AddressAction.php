@@ -28,7 +28,6 @@ class AddressAction
 
         $address->text = $data->text;
         $address->hours_of_operations = $data->hours_of_operations;
-        $address->id = $data->id;
 
         $address->save();
 

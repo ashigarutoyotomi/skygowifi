@@ -26,7 +26,6 @@ class CityAction
 
         $city->country_id = $data->country_id;
         $city->name = $data->name;
-        $city->id = $data->id;
         $city->save();
 
         return $city;

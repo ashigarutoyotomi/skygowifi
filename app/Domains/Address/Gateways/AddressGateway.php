@@ -18,10 +18,7 @@ class AddressGateway
         $query = Address::query();
         return $query->get();
     }
-
-    public function setSearch($keywords,$query){
-        $query->where('text',"%LIKE%",$keywords);
-    }
+    
     public function show($address_id){
         $address = Address::find($address_id); 
         return $address;

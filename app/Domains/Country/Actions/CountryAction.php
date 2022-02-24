@@ -25,7 +25,6 @@ class CountryAction
         abort_unless((bool)$country, 404, 'Country not found');
 
         $country->name = $data->name;
-        $country->id = $data->id;
         $country->save();
 
         return $country;
