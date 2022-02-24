@@ -25,19 +25,12 @@ class UserGateway
         return $query;
     }
 
-    public function all(){
-        return User::all(); 
-    }
-
-    // public function setSearch($query,$keywords){
-    //     $query->where('first_name', 'like', '%' . $keywords. '%')
-    //     ->orWhere('last_name', 'like', '%' . $keywords. '%');
-    //     return $query;
-    // }
-
-    public function show($id){
-        $user = User::find($id);
-        return $user;
+    public function all($keyword){
+        $query = User::query();
+        if(!empty($keyword)){
+            $query->where('first_name','%LIKE%',$keyword)->where('last_name','%LIKE%',$keyword);
+        }
+        return $query::get(); 
     }
 
     public function edit($id){

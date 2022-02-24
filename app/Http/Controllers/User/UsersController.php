@@ -22,14 +22,14 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $query = User::query();
+        $query = Gateway::all();
         
         $filters = json_decode($request->get('filters'),true);
         if(!empty($request->filters)){
                 $query = UserGateway::appendFilters($filters);
         }
         if(!empty($request->keywords)){
-                $query = UserGateway::setSearch($request->keywords,['first_name','last_name']);                
+                $query = UserGateway::setSearch($request->keywords,['first_name','last_name','email']);                
                    
         } 
         $users = $query->get();
@@ -49,8 +49,8 @@ class UsersController extends Controller
 
     public function show($userId)
     {
-        $user = UserGateway::show($userId);
-        abort_unless((bool)$user, 404, 'user not found');
+        $user = UserGateway::find($userId);
+        abort_unless((bool)$user, 404, 'User not found');
         return $user;
     }
 

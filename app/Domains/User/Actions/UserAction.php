@@ -37,9 +37,7 @@ class UserAction
         $user->address = $data->address;
         $user->role = $data->role;
         $user->phone_number = $data->phone_number;
-        if(empty($data->password)){
-            ;
-        }else {
+        if(!empty($data->password)){
             $user->password= Hash::make($data->password);
         }
         $user->save();

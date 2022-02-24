@@ -13,7 +13,7 @@ class UpdateUserData extends DataTransferObject
     public ?string $address;
     public string $phone_number;
     public int $id;
-    public string $password;
+    public ?string $password;
 
     public static function fromRequest(
     UserRequest $request,$user_id) : UpdateUserData {
