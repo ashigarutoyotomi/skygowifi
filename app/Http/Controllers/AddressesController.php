@@ -14,13 +14,17 @@ class AddressesController extends Controller
 {
     public function index(Request $request)
     {
-        if (empty($request->keywords)) {
-            $addresses = AddressGateway::all();
-            return $addresses;
+        $gateway = new AddressGateway();
+        
+        $filters = json_decode($request->get('filters'),true);
+        if(!empty($filters)){
+                $gateway->setFilters($filters);
         }
-        $query = Address::query();
-        $query = AddressGateway::setSearch($request->keywords, $query);
-        $addresses = $query->get();
+        $keywords =$request->get('keywords');
+        if($keywords){
+                $gateway->setSearch($keywords,['text']); 
+        } 
+        $addresses = $gateway->all();
         return $addresses;
     }
     public function edit($address_id)
@@ -30,7 +34,7 @@ class AddressesController extends Controller
     }
     public function show($address_id)
     {
-        $address = AddressGateway::show($address_id);
+        $address = AddressGateway::find($address_id);
         return $address;
     }
     public function store(AddressRequest $request)
@@ -56,7 +60,7 @@ class AddressesController extends Controller
     }
     public function delete($address_id)
     {
-        $address = AddressGateway::show($address_id);
+        $address = AddressGateway::find($address_id);
         abort_unless((bool) $address, 404, 'Address not found');
         $address->delete();
         return $address;

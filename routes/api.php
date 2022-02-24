@@ -23,36 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, "me"]);
     Route::get('/logout', [AuthController::class, 'logout']);
 
-    //addresses
-    Route::group(['prefix' => 'addresses'], function () {
-        Route::get('/', [AddressesController::class, 'index']);
-        Route::post('/store', [AddressesController::class, 'store']);
-        Route::post('/{id}/update', [AddressesController::class, 'update']);
-        Route::get('/{id}/show', [AddressesController::class, 'show']);
-        Route::get('/{id}/edit', [AddressesController::class, 'edit']);
-        Route::delete('/{id}/delete', [AddressesController::class, 'delete']);
-    });
-
-    //countries
-    Route::group(['prefix' => 'countries'], function () {
-        Route::get('/', [CountriesController::class, 'index']);
-        Route::post('/store', [CountriesController::class, 'store']);
-        Route::post('/{id}/update', [CountriesController::class, 'update']);
-        Route::get('/{id}/show', [CountriesController::class, 'show']);
-        Route::get('/{id}/edit', [CountriesController::class, 'edit']);
-        Route::delete('/{id}/delete', [CountriesController::class, 'delete']);
-    });
-
-    //cities
-    Route::group(['prefix' => 'cities'], function () {
-        Route::get('/', [CitiesController::class, 'index']);
-        Route::post('/store', [CitiesController::class, 'store']);
-        Route::post('/{id}/update', [CitiesController::class, 'update']);
-        Route::get('/{id}/show', [CitiesController::class, 'show']);
-        Route::get('/{id}/edit', [CitiesController::class, 'edit']);
-        Route::delete('/{id}/delete', [CitiesController::class, 'delete']);
-    });
-
+ 
     //users crud
     Route::group(['prefix' => '/users'], function () {
         Route::get('/', [UsersController::class, 'index']);
@@ -62,4 +33,34 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}/update', [UsersController::class, "update"]);
         Route::delete('/{id}/delete', [UsersController::class, 'delete']);
     });
+});
+
+   //addresses
+   Route::group(['prefix' => 'addresses'], function () {
+    Route::get('/', [AddressesController::class, 'index']);
+    Route::post('/store', [AddressesController::class, 'store']);
+    Route::post('/{id}/update', [AddressesController::class, 'update']);
+    Route::get('/{id}/show', [AddressesController::class, 'show']);
+    Route::get('/{id}/edit', [AddressesController::class, 'edit']);
+    Route::delete('/{id}/delete', [AddressesController::class, 'delete']);
+});
+
+//countries
+Route::group(['prefix' => 'countries'], function () {
+    Route::get('/', [CountriesController::class, 'index']);
+    Route::post('/store', [CountriesController::class, 'store']);
+    Route::post('/{id}/update', [CountriesController::class, 'update']);
+    Route::get('/{id}/show', [CountriesController::class, 'show']);
+    Route::get('/{id}/edit', [CountriesController::class, 'edit']);
+    Route::delete('/{id}/delete', [CountriesController::class, 'delete']);
+});
+
+//cities
+Route::group(['prefix' => 'cities'], function () {
+    Route::get('/', [CitiesController::class, 'index']);
+    Route::post('/store', [CitiesController::class, 'store']);
+    Route::post('/{id}/update', [CitiesController::class, 'update']);
+    Route::get('/{id}/show', [CitiesController::class, 'show']);
+    Route::get('/{id}/edit', [CitiesController::class, 'edit']);
+    Route::delete('/{id}/delete', [CitiesController::class, 'delete']);
 });
