@@ -2,7 +2,7 @@
 
 namespace App\Domains\Address\Models;
 use Illuminate\Database\Eloquent\Model;
-use App\Domains\Cities\Models\City;
+use App\Domains\City\Models\City;
 class Address extends Model
 {
 
@@ -18,6 +18,6 @@ class Address extends Model
     ];
 
     public function city(){
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class,"city_id");
     }
 }

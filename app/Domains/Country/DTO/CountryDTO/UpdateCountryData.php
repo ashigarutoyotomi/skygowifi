@@ -8,7 +8,7 @@ class UpdateCountryData extends DataTransferObject
 {
     public string $name;
     public int $id;
-    public static function fromRequest(UpdateCountriesRequest $request,$country_id): CreateCountryData
+    public static function fromRequest(UpdateCountriesRequest $request,$country_id): UpdateCountryData
     {
         $data = [
             'name' => $request->name,

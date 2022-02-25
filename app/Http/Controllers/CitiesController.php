@@ -7,8 +7,8 @@ use App\Domains\City\DTO\CityDTO\CreateCityData;
 use App\Domains\City\DTO\CityDTO\UpdateCityData;
 use App\Domains\City\Gateways\CityGateway;
 use App\Domains\City\Models\City;
-use App\Http\Requests\CitiesRequest;
-use App\Http\Requests\UpdateCitiesRequest;
+use App\Domains\City\DTO\CityDTO\CitiesRequest;
+use App\Domains\City\DTO\CityDTO\UpdateCitiesRequest;
 use Illuminate\Http\Request;
 
 class CitiesController extends Controller
@@ -25,20 +25,20 @@ class CitiesController extends Controller
         if($keywords){
                 $gateway->setSearch($keywords,['name']); 
         } 
-        $addresses = $gateway->all();
-        return $addresses;
+        $cities = $gateway->all();
+        return $cities;
     }
     public function edit($city_id)
     {
         $city = CityGateway::edit($city_id);
         $country = $city->country;        
-        return response()->json(array_merge($city, $country));
+        return response()->json([$city, $country]);
     }
     public function show($city_id)
     {
         $city = CityGateway::show($city_id);
         $country = $city->country;        
-        return response()->json(array_merge($city, $country));
+        return response([$city, $country]);
     }
     public function store(CitiesRequest $request)
     {

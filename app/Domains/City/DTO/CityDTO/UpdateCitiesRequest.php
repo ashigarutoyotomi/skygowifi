@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Domains\City\DTO\CityDTO;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CitiesRequest extends FormRequest
+class UpdateCitiesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

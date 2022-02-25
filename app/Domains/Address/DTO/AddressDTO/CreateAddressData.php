@@ -9,12 +9,12 @@ class CreateAddressData extends DataTransferObject
     public string $text;
     public ?int $hours_of_operations;
     public int $city_id;
-    public static function fromRequest(CreateAddressRequest $request): CreateAddressData
+    public static function fromRequest(AddressRequest $request): CreateAddressData
     {
         $data = [
             'text' => $request->text,
-            'country_id' => (int)$request->country_id,
-            'hours_of_operations' => $request->hours_of_operations,
+            'hours_of_operations' => (int)$request->hours_of_operations,
+            'city_id' => (int)$request->city_id,
         ];
 
         return new self($data);

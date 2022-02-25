@@ -2,7 +2,7 @@
 
 namespace App\Domains\Country\Models;
 use Illuminate\Database\Eloquent\Model;
-use App\Domains\Cities\Models\City;
+use App\Domains\City\Models\City;
 class Country extends Model
 {
 
@@ -15,7 +15,7 @@ class Country extends Model
         'name',
     ];
     public function cities(){
-        return $this->hasMany(City::class);
+        return $this->hasMany(City::class,'country_id');
     }
 
 }

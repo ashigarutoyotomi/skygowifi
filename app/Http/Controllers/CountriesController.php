@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Domains\Country\Actions\CountryAction;
 use App\Domains\Country\DTO\CountryDTO\CreateCountryData;
-use App\Http\Requests\UpdateCountriesRequest;
+use App\Domains\Country\DTO\CountryDTO\UpdateCountriesRequest;
 use App\Domains\Country\Gateways\CountryGateway;
 use App\Domains\Country\Models\Country;
-use App\Http\Requests\CountriesRequest;
+use App\Domains\Country\DTO\CountryDTO\CountriesRequest;
 use App\Domains\Country\DTO\CountryDTO\UpdateCountryData;
 
 class CountriesController extends Controller
@@ -25,18 +25,8 @@ class CountriesController extends Controller
         if($keywords){
                 $gateway->setSearch($keywords,['name']); 
         } 
-        $countries = $gateway->all();
-        return $countries;
-
-
-        // if (empty($request->keywords)) {
-        //     $countries = CountryGateway::all();
-        //     return $countries;
-        // }
-        // $query = Country::query();
-        // $query = CountryGateway::setSearch($request->keywords, $query);
-        // $countries = $query->get();
-        // return $countries;
+        $country = $gateway->all();
+        return $country;
     }
     public function edit($country_id)
     {
@@ -62,7 +52,7 @@ class CountriesController extends Controller
     }
     public function delete($country_id)
     {
-        $country= CountryAction::delete($country_id);
+        $country = CountryAction::delete($country_id);
         return $country;
     }
 }

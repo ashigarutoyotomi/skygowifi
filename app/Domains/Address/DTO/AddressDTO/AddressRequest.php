@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Domains\Address\DTO\AddressDTO;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCitiesRequest extends FormRequest
+class AddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class UpdateCitiesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|string'
-            ,
-            'country_id' =>"required|integer"
+            'text'=>'required|string',
+            'city_id'=>'required|integer',
+            'hours_of_operations'=>'nullable|integer'
         ];
     }
 }

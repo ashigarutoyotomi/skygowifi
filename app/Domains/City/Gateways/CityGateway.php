@@ -26,6 +26,19 @@ class CityGateway
         }
         return $query->get(); 
     }
+
+    protected function appendFilters($query)
+    {
+        if (array_key_exists('start_created_at', $this->filters)) {
+            $query->where('created_at', '>=', $this->filters['start_created_at']);
+        }
+
+        if (array_key_exists('end_created_at', $this->filters)) {
+            $query->where('created_at', '<=',  $this->filters['end_created_at']);
+        }
+
+        return $query;
+    }
    
     public function show($city_id)
     {
@@ -36,5 +49,6 @@ class CityGateway
     {
         $city = City::find($city_id);
         return $city;
-    }
+        
+}
 }

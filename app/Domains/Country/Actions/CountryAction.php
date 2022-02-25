@@ -34,5 +34,6 @@ class CountryAction
 
         abort_unless((bool)$country, 404, 'country not found');
         $country->delete();
+        return $country;
     }
 }
