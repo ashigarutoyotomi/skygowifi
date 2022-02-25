@@ -30,12 +30,16 @@ class AddressesController extends Controller
     public function edit($address_id)
     {
         $address = AddressGateway::edit($address_id);
-        return $address;
+        $city = $address->city;
+        $country = $address->country;
+        return response()->json(array_merge($address,$country,$city));
     }
     public function show($address_id)
     {
         $address = AddressGateway::find($address_id);
-        return $address;
+        $city = $address->city;
+        $country = $address->country;
+        return response()->json(array_merge($address,$country,$city));
     }
     public function store(AddressRequest $request)
     {

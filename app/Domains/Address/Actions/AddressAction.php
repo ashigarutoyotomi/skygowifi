@@ -24,7 +24,7 @@ class AddressAction
     public function update(UpdateAddressData $data)
     {
         $address = Address::find($data->id);
-        abort_unless((bool)$address, 404, 'address not found');
+        abort_unless((bool)$address, 404, 'Address not found');
 
         $address->text = $data->text;
         $address->hours_of_operations = $data->hours_of_operations;
