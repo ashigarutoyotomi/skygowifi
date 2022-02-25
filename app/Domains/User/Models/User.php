@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App\Domains\User\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,20 +12,24 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * the attributes are mass assignable.
      *
-     * @var array<int, string>
+     * @var string[]
      */
     protected $fillable = [
-        'name',
+        'first_name',
         'email',
-        'password',
+        'last_name',
+        'role',
+        'address',
+        'phone_number',
+        'password'
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * attributes that should be hiden for serialization
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -36,9 +39,14 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    const USER_ROLE_USER= 1;
+    const USER_ROLE_DEALER = 2;
+    const USER_ROLE_ADMIN = 3;
+    const USER_ROLE_SUPERADMIN = 999;
 }
