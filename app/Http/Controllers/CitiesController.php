@@ -31,37 +31,30 @@ class CitiesController extends Controller
     public function edit($city_id)
     {
         $city = CityGateway::edit($city_id);
-        return $city;
+        $country = $city->country;        
+        return response()->json(array_merge($city, $country));
     }
     public function show($city_id)
     {
         $city = CityGateway::show($city_id);
-        return $city;
+        $country = $city->country;        
+        return response()->json(array_merge($city, $country));
     }
     public function store(CitiesRequest $request)
     {
-        $data = new CreateCityData([
-            'name' => $request->name,
-            'country_id' => (int) $request->country_id,
-        ]);
+        $data = CreateCityData::fromRequest($request);
 
         return (new CityAction)->create($data);
     }
     public function update(UpdateCitiesRequest $request, $city_id)
     {
-        $data = new UpdateCityData([
-            'name' => $request->name,
-            'country_id' => (int) $request->country_id,
-            'id' => (int) $request->id,
-        ]);
+        $data = UpdateCityData::fromRequest($request,$city_id);
 
         return (new CityAction)->update($data);
     }
     public function delete($city_id)
     {
-        $city = CityGateway::show($city_id);
-        abort_unless((bool)$city, 404, 'City not found');
-        $city->delete();
+        $city = CityAction::delete($city_id);
         return $city;
     }
 }

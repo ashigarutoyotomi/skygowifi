@@ -43,30 +43,19 @@ class AddressesController extends Controller
     }
     public function store(AddressRequest $request)
     {
-        $data = new CreateAddressData([
-            'text' => $request->text,
-            'city_id' => (int) $request->city_id,
-            'hours_of_operations' => (int) $request->hours_of_operations,
-        ]);
+        $data = CreateAddressData::fromRequest($request);
 
         return (new AddressAction)->create($data);
     }
     public function update(UpdateAddressRequest $request, $address_id)
     {
-        $data = new UpdateAddressData([
-            'text' => $request->text,
-            'hours_of_operations' => (int)$request->hours_of_operations,
-            'city_id' => (int)$request->city_id,
-            'id' => (int)$address_id,
-        ]);
+        $data = UpdateAddressData::fromRequest($request,$address_id);
         
         return (new AddressAction)->update($data);;
     }
     public function delete($address_id)
     {
-        $address = AddressGateway::find($address_id);
-        abort_unless((bool) $address, 404, 'Address not found');
-        $address->delete();
+        $address = AddressAction::delete($address_id);        
         return $address;
     }
 }

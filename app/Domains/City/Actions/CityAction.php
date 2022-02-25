@@ -30,4 +30,10 @@ class CityAction
 
         return $city;
     }
+    public function delete($city_id){
+        $city = City::find($city_id);
+        abort_unless((bool)$city, 404, 'City not found');
+        $city->delete();
+        return $city;
+    }
 }

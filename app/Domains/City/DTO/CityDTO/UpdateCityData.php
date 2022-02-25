@@ -9,4 +9,14 @@ class UpdateCityData extends DataTransferObject
     public string $name;
     public int $country_id;
     public int $id;
+    public static function fromRequest(UpdateCityRequest $request): UpdateCityData
+    {
+        $data = [
+            'name' => $request->name,
+            'country_id' => (int)$request->country_id,
+            'id' => (int)$city_id,
+        ];
+
+        return new self($data);
+    }
 }

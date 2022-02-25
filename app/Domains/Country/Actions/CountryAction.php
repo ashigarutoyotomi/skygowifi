@@ -29,4 +29,10 @@ class CountryAction
 
         return $country;
     }
+    public function delete($country_id){
+        $country = Country::find($country_id);
+
+        abort_unless((bool)$country, 404, 'country not found');
+        $country->delete();
+    }
 }

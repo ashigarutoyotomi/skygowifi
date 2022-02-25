@@ -26,8 +26,7 @@ class UpdateCitiesRequest extends FormRequest
         return [
             'name'=>'required|string'
             ,
-            'country_id' =>"required|integer",
-            'id'=>'required|integer'
+            'country_id' =>"required|integer"
         ];
     }
 }

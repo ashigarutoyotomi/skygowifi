@@ -24,8 +24,7 @@ class UpdateCountriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>'required|string',
-            'id'=>'required|integer'
+            'name' =>'required|string'
         ];
     }
 }

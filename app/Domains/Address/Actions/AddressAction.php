@@ -33,4 +33,10 @@ class AddressAction
 
         return $address;
     }
+    public function delete($address_id){
+        $address = Address::find($address_id);
+        abort_unless((bool) $address, 404, 'Address not found');   
+        $address->delete();     
+        return $address;
+    }
 }
