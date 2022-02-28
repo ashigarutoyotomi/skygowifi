@@ -4,7 +4,7 @@ namespace App\Domains\Country\DTO\CountryDTO;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CountriesRequest extends FormRequest
+class CreateCountriesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

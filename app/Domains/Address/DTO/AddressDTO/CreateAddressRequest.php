@@ -4,7 +4,7 @@ namespace App\Domains\Address\DTO\AddressDTO;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddressRequest extends FormRequest
+class CreateAddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

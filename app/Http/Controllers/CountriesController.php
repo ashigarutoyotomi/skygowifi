@@ -8,7 +8,7 @@ use App\Domains\Country\DTO\CountryDTO\CreateCountryData;
 use App\Domains\Country\DTO\CountryDTO\UpdateCountriesRequest;
 use App\Domains\Country\Gateways\CountryGateway;
 use App\Domains\Country\Models\Country;
-use App\Domains\Country\DTO\CountryDTO\CountriesRequest;
+use App\Domains\Country\DTO\CountryDTO\CreateCountriesRequest;
 use App\Domains\Country\DTO\CountryDTO\UpdateCountryData;
 
 class CountriesController extends Controller
@@ -30,15 +30,15 @@ class CountriesController extends Controller
     }
     public function edit($country_id)
     {
-        $country_id = CountryGateway::edit($country_id);
+        $country_id = (new CountryGateway)->edit($country_id);
         return $country_id;
     }
     public function show($country_id)
     {
-        $country_id = CountryGateway::show($country_id);
+        $country_id = (new CountryGateway)->show($country_id);
         return $country_id;
     }
-    public function store(CountriesRequest $request)
+    public function store(CreateCountriesRequest $request)
     {
         $data = CreateCountryData::fromRequest($request);
 

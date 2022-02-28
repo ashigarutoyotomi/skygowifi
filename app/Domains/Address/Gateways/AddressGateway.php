@@ -44,8 +44,5 @@ class AddressGateway
     }
     public function find($id){
         return Address::find($id);
-    }
-    public function with ($addon){
-        return 
-    }
+    }    
 }

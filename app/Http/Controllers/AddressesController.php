@@ -6,7 +6,7 @@ use App\Domains\Address\DTO\AddressDTO\CreateAddressData;
 use App\Domains\Address\DTO\AddressDTO\UpdateAddressRequest;
 use App\Domains\Address\Gateways\AddressGateway;
 use App\Domains\Address\Models\Address;
-use App\Domains\Address\DTO\AddressDTO\AddressRequest;
+use App\Domains\Address\DTO\AddressDTO\CreateAddressRequest;
 use Illuminate\Http\Request;
 use App\Domains\Address\DTO\AddressDTO\UpdateAddressData;
 
@@ -29,19 +29,19 @@ class AddressesController extends Controller
     }
     public function edit($address_id)
     {
-        $address = AddressGateway::edit($address_id);
+        $address = (new AddressGateway)->with(['country','city'])->edit($address_id);
         $city = $address->city;
         $country = $address->country;
-        return response()->json($address,$country,$city);
+        return response()->json($address);
     }
     public function show($address_id)
     {
-        $address = AddressGateway::find($address_id);
+        $address = (new AddressGateway)->with(['city'])->edit($address_id);
         $city = $address->city;
         $country = $address->country;
-        return response()->json([$address,$country,$city]);
+        return response()->json($address);
     }
-    public function store(AddressRequest $request)
+    public function store(CreateAddressRequest $request)
     {
         $data = CreateAddressData::fromRequest($request);
 

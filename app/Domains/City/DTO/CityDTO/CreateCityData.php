@@ -8,7 +8,7 @@ class CreateCityData extends DataTransferObject
 {
     public string $name;
     public int $country_id;
-    public static function fromRequest(CitiesRequest $request): CreateCityData
+    public static function fromRequest(CreateCitiesRequest $request): CreateCityData
     {
         $data = [
             'name' => $request->name,

@@ -7,7 +7,7 @@ use App\Domains\City\DTO\CityDTO\CreateCityData;
 use App\Domains\City\DTO\CityDTO\UpdateCityData;
 use App\Domains\City\Gateways\CityGateway;
 use App\Domains\City\Models\City;
-use App\Domains\City\DTO\CityDTO\CitiesRequest;
+use App\Domains\City\DTO\CityDTO\CreateCitiesRequest;
 use App\Domains\City\DTO\CityDTO\UpdateCitiesRequest;
 use Illuminate\Http\Request;
 
@@ -30,17 +30,15 @@ class CitiesController extends Controller
     }
     public function edit($city_id)
     {
-        $city = CityGateway::edit($city_id);
-        $country = $city->country;        
-        return response()->json([$city, $country]);
+        $city = (new CityGateway)->with(['country'])->edit($city_id);
+        return response()->json($city);
     }
     public function show($city_id)
     {
-        $city = CityGateway::show($city_id);
-        $country = $city->country;        
-        return response([$city, $country]);
+        $city = (new CityGateway)->with(['country'])->edit($city_id);
+        return response()->json($city);
     }
-    public function store(CitiesRequest $request)
+    public function store(CreateCitiesRequest $request)
     {
         $data = CreateCityData::fromRequest($request);
 
