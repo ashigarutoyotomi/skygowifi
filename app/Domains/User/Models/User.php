@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Domains\Device\Models\Device;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -49,7 +50,4 @@ class User extends Authenticatable
     const USER_ROLE_DEALER = 2;
     const USER_ROLE_ADMIN = 3;
     const USER_ROLE_SUPERADMIN = 999;
-    public function devices(){
-        return $this->hasMany(Device::class,'creator_id');
-    }
 }
