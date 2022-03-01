@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Address;
 use App\Domains\Address\Actions\AddressAction;
 use App\Domains\Address\DTO\AddressDTO\CreateAddressData;
 use App\Domains\Address\DTO\AddressDTO\UpdateAddressRequest;
@@ -9,7 +9,7 @@ use App\Domains\Address\Models\Address;
 use App\Domains\Address\DTO\AddressDTO\CreateAddressRequest;
 use Illuminate\Http\Request;
 use App\Domains\Address\DTO\AddressDTO\UpdateAddressData;
-
+use App\Http\Controllers\Controller;
 class AddressesController extends Controller
 {
     public function index(Request $request)
@@ -51,7 +51,7 @@ class AddressesController extends Controller
     }
     public function delete($address_id)
     {
-        $address = AddressAction::delete($address_id);        
+        $address = (new AddressAction)->delete($address_id);        
         return $address;
     }
 }

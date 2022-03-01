@@ -3,7 +3,7 @@
 namespace App\Domains\City\DTO\CityDTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
-
+use App\Domains\City\DTO\CityDTO\UpdateCitiesRequest;
 class UpdateCityData extends DataTransferObject
 {
     public string $name;

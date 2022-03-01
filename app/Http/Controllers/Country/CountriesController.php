@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Country;
 
 use Illuminate\Http\Request;
 use App\Domains\Country\Actions\CountryAction;
@@ -10,6 +10,7 @@ use App\Domains\Country\Gateways\CountryGateway;
 use App\Domains\Country\Models\Country;
 use App\Domains\Country\DTO\CountryDTO\CreateCountryRequest;
 use App\Domains\Country\DTO\CountryDTO\UpdateCountryData;
+use App\Http\Controllers\Controller;
 
 class CountriesController extends Controller
 {
@@ -30,12 +31,12 @@ class CountriesController extends Controller
     }
     public function edit($country_id)
     {
-        $country_id = (new CountryGateway)->edit($country_id);
+        $country = (new CountryGateway)->edit($country_id);
         return $country;
     }
     public function show($country_id)
     {
-        $country_id = (new CountryGateway)->show($country_id);
+        $country = (new CountryGateway)->show($country_id);
         return $country;
     }
     public function store(CreateCountryRequest $request)
@@ -52,7 +53,7 @@ class CountriesController extends Controller
     }
     public function delete($country_id)
     {
-        $country = CountryAction::delete($country_id);
+        $country = (new CountryAction)->delete($country_id);
         return $country;
     }
 }

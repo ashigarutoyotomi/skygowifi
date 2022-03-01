@@ -7,7 +7,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 class CreateCountryData extends DataTransferObject
 {
     public string $name;
-    public static function fromRequest(CreateCountriesRequest $request): CreateCountryData
+    public static function fromRequest(CreateCountryRequest $request): CreateCountryData
     {
         $data = [
             'name' => $request->name,

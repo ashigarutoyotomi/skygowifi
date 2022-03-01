@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\City;
+use App\Http\Controllers\Controller;
 use App\Domains\City\Actions\CityAction;
 use App\Domains\City\DTO\CityDTO\CreateCityData;
 use App\Domains\City\DTO\CityDTO\UpdateCityData;
@@ -10,7 +10,6 @@ use App\Domains\City\Models\City;
 use App\Domains\City\DTO\CityDTO\CreateCitiesRequest;
 use App\Domains\City\DTO\CityDTO\UpdateCitiesRequest;
 use Illuminate\Http\Request;
-
 class CitiesController extends Controller
 {
     public function index(Request $request)
@@ -52,7 +51,7 @@ class CitiesController extends Controller
     }
     public function delete($city_id)
     {
-        $city = CityAction::delete($city_id);
+        $city = (new CityAction)->delete($city_id);
         return $city;
     }
 }

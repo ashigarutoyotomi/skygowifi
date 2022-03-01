@@ -20,6 +20,6 @@ class City extends Model
         return $this->belongsTo(Country::class,'country_id');
     }
     public function address(){
-        return $this->hasOne(Address::class,'city_id');
+        return $this->hasMany(Address::class,'city_id');
     }
 }
