@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-
-use App\Models\User;
+use App\Domains\User\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,11 +77,12 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
-        
-        $user = User::where('email', 
-        $credentials['email'])->first();
+        $user = User::where(
+            'email',
+            $credentials['email']
+        )->first();
         $match = Hash::check($request->password, $user->password);
-
+        
         if ($user && $match) {
             $token = $user->createToken('access-token')->plainTextToken;
 
