@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Facades\Auth;
 class CreateDeviceRequest extends FormRequest
 {
     /**
@@ -27,7 +27,7 @@ class CreateDeviceRequest extends FormRequest
             'serial_number'=>'nullable|string'
             ,
             'csv' =>"nullable|file",
-            'address_id'=>'required|integer'
+            'address_id'=>'required|integer',
         ];
     }
 }

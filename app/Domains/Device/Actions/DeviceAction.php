@@ -6,7 +6,7 @@ use App\Domains\Device\DTO\DeviceDTO\CreateDeviceData;
 use App\Domains\Device\Models\Device;
 use App\Domains\Device\DTO\DeviceDTO\UpdateDeviceData;
 use App\Domains\User\Models\User;
-
+use App\Http\Requests\CreateDeviceRequest;
 class DeviceAction
 {
     /**
@@ -14,13 +14,10 @@ class DeviceAction
      * @param CreateDeviceData $data
      * @return mixed
      */
-    public function create(CreateDeviceData $data)
+    public function create(CreateDeviceData $request)
     {
-        return Device::create([
-            'address_id' => $data->address_id,
-            'serial_number' => $data->serial_number,
-            'creator_id'=>1//Auth::user()->id;
-        ]);
+        $data = (new CreateDeviceRequest)->fromRequest($request);
+        return Device::create($data);
     }
 
     public function update(UpdateDeviceData $data, $deviceId)

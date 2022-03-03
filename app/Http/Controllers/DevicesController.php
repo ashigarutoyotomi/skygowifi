@@ -40,7 +40,7 @@ class DevicesController extends Controller
         return $device;
     }
     public function store(CreateDeviceRequest $request)
-    {//$2y$10$diHOZDFWU/43EWpEWDQuquYMN/tpTPclfEOzBcuAWHFJDds1MnAfK
+    {
         $user = Auth::user();
         $data = CreateDeviceData::fromRequest($request,1);
         if (!empty($request->csv)

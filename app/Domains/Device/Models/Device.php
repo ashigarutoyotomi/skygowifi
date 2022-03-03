@@ -11,9 +11,9 @@ class Device extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id','address_id','creator_id','serial_number'
+        'address_id','creator_id','serial_number'
     ];
-    public function user(){
+    public function creator(){
         return $this->belongsTo(User::class,'id');
     }
     public function address(){
