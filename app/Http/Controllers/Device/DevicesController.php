@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Device;
 
 use App\Domains\Device\Actions\DeviceAction;
 use App\Domains\Device\DTO\DeviceDTO\CreateDeviceData;
@@ -11,7 +11,7 @@ use App\Http\Requests\CreateDeviceRequest;
 use Illuminate\Http\Request;
 use App\Domains\Device\DTO\DeviceDTO\UpdateDeviceData;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\Controller;
 class DevicesController extends Controller
 {
     public function index(Request $request)
@@ -31,18 +31,20 @@ class DevicesController extends Controller
     }
     public function edit($device_id)
     {
-        $device = (new DeviceGateway)->with(['user'])->edit($device_id);
-        return $device;
+        $device = (new DeviceGateway)->edit($device_id);   
+        $creator = $device->creator();    
+        return [$device,$creator];
     }
     public function show($device_id)
     {
-        $device = (new DeviceGateway)->with(['user'])->edit($device_id);
-        return $device;
+        $device = (new DeviceGateway)->edit($device_id);
+        $creator = $device->creator();    
+        return [$device,$creator];
     }
     public function store(CreateDeviceRequest $request)
     {
         $user = Auth::user();
-        $data = CreateDeviceData::fromRequest($request,$user->id);
+        $data = CreateDeviceData::fromRequest($request,1);
         if (!empty($request->csv)
         &&
         $request->file('csv')->isValid()) {
@@ -58,12 +60,14 @@ class DevicesController extends Controller
                     $i++;
                     continue;
                 }
-                $data = new CreateDeviceData([
-                    'serial_number'=>$row[0],
-                    'address_id' =>$request->address_id,
-                    'creator_id'=>$user->id,
-                ]);
+                $data = (new CreateDeviceData([
+                    'creator_id' => 1,
+                    'serial_number' => $row[0],
+                    'address_id'=>$request->address_id
+                ]));
+
                 $device = Device::where('serial_number',$row[0])->first();
+
                 if($device!=null){
                     $devices[]=(new DeviceAction)->create($data);
                 }      
@@ -75,10 +79,17 @@ class DevicesController extends Controller
     }
     public function update(UpdateDeviceRequest $request, $device_id)
     {
-        $data = UpdateDeviceData::fromRequest($request, $device_id);
-        
-        return (new DeviceAction)->update($data, $device_id);
+        $data = UpdateDeviceData::fromRequest($request,$device_id);
+
+        $device = Device::find($device_id);
+        abort_unless((bool)$device, 404, 'Device not found');
+
+        $device = (new DeviceAction)->update($data,$device_id);        
+
+        $device->serial_number = $data->serial_number;
+        $device->save();
         ;
+        return $device;
     }
     public function delete($device_id)
     {

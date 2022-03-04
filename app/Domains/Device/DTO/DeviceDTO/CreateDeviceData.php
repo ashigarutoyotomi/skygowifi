@@ -12,13 +12,13 @@ class CreateDeviceData extends DataTransferObject
     public int $creator_id;
     public string $address_id;
 
-    public static function fromRequest(CreateDeviceRequest $request,$user_id) : CreateDeviceData
+    public static function fromRequest(CreateDeviceRequest $request) : CreateDeviceData
     {
         $user = Auth::user();
         $data = [
             'address_id' => $request->address_id,
             'serial_number' => $request->serial_number,
-            'creator_id' => $user->id
+            'creator_id' => 1
         ];
 
         return new self($data);

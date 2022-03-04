@@ -26,7 +26,7 @@ class CreateDeviceRequest extends FormRequest
         return [
             'serial_number'=>'nullable|string'
             ,
-            'csv' =>"nullable|file",
+            'csv' =>"required_unless:serial_number,string|file",
             'address_id'=>'required|integer',
         ];
     }

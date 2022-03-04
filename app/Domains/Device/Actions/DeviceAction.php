@@ -16,16 +16,16 @@ class DeviceAction
      * @param CreateDeviceData $data
      * @return mixed
      */
-    public function create(CreateDeviceData $request)
+    public function create(CreateDeviceData $data)
     {
-        $data = CreateDeviceRequest::fromRequest($request);
+        // $data = CreateDeviceData::fromRequest($request);
         return Device::create($data);
     }
 
-    public function update(UpdateDeviceData $data)
+    public function update(UpdateDeviceData $data,$device_id)
     {
         $user = Auth::user();
-        $device = Device::find($data->device_id);
+        $device = Device::find($device_id);
         abort_unless((bool)$device, 404, "Device not found");
         $device->serial_number = $data->serial_number;
         if (!empty($data->address_id)) {

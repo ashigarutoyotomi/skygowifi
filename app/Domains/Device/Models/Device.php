@@ -14,7 +14,7 @@ class Device extends Model
         'address_id','creator_id','serial_number'
     ];
     public function creator(){
-        return $this->belongsTo(User::class,'id');
+        return $this->belongsTo(User::class,'creator_id');
     }
     public function address(){
         return $this->belongsTo(Address::class,'id');

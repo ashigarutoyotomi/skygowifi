@@ -49,7 +49,8 @@ class User extends Authenticatable
     const USER_ROLE_DEALER = 2;
     const USER_ROLE_ADMIN = 3;
     const USER_ROLE_SUPERADMIN = 999;
+    
     public function devices(){
-        return $this->hasMany(Device::class);
+        return $this->hasMany(Device::class,'creator_id');
     }
 }
