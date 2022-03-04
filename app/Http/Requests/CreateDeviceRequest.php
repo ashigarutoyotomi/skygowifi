@@ -21,13 +21,21 @@ class CreateDeviceRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
         return [
-            'serial_number'=>'nullable|string'
+            'serial_number'=>'required_without:csv|string'
             ,
-            'csv' =>"required_unless:serial_number,string|file",
+            'csv' =>"required_without:serial_number|file",
             'address_id'=>'required|integer',
+        ];
+    }
+    public function messages (){
+        return [
+            'address_id.required'=>'Address id cannot be null',
+            'serial_number.required'=>'serial number needed',
+            'csv.required'=>'csv file is required to upload',
         ];
     }
 }

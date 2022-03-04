@@ -18,8 +18,11 @@ class DeviceAction
      */
     public function create(CreateDeviceData $data)
     {
-        // $data = CreateDeviceData::fromRequest($request);
-        return Device::create($data);
+        return Device::create([
+            'address_id' => $data->address_id,
+            'creator_id' => 1,
+            'serial_number' => $data->serial_number,
+        ]);
     }
 
     public function update(UpdateDeviceData $data,$device_id)

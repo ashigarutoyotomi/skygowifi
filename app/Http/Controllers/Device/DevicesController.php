@@ -31,20 +31,18 @@ class DevicesController extends Controller
     }
     public function edit($device_id)
     {
-        $device = (new DeviceGateway)->edit($device_id);   
-        $creator = $device->creator();    
-        return [$device,$creator];
+        $device = (new DeviceGateway)->with('creator')->edit($device_id); 
+        return $device;
     }
     public function show($device_id)
     {
-        $device = (new DeviceGateway)->edit($device_id);
-        $creator = $device->creator();    
-        return [$device,$creator];
+        $device = (new DeviceGateway)->with('creator')->edit($device_id); 
+        return $device;
     }
     public function store(CreateDeviceRequest $request)
     {
-        $user = Auth::user();
-        $data = CreateDeviceData::fromRequest($request,1);
+        $user = Auth::user(); 
+        $data = CreateDeviceData::fromRequest($request);                  
         if (!empty($request->csv)
         &&
         $request->file('csv')->isValid()) {
@@ -59,16 +57,12 @@ class DevicesController extends Controller
                 if ($i ==0) {
                     $i++;
                     continue;
-                }
-                $data = (new CreateDeviceData([
-                    'creator_id' => 1,
-                    'serial_number' => $row[0],
-                    'address_id'=>$request->address_id
-                ]));
+                }                
 
                 $device = Device::where('serial_number',$row[0])->first();
-
-                if($device!=null){
+                $data->serial_number = $row[0];
+                
+                if(!(bool)$device){
                     $devices[]=(new DeviceAction)->create($data);
                 }      
             }
