@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Domains\Device\Actions;
+
 use Illuminate\Support\Facades\Auth;
 use App\Domains\Device\DTO\DeviceDTO\CreateDeviceData;
 use App\Domains\Device\Models\Device;
 use App\Domains\Device\DTO\DeviceDTO\UpdateDeviceData;
 use App\Domains\User\Models\User;
 use App\Http\Requests\CreateDeviceRequest;
+
 class DeviceAction
 {
     /**
@@ -16,19 +18,19 @@ class DeviceAction
      */
     public function create(CreateDeviceData $request)
     {
-        $data = (new CreateDeviceRequest)->fromRequest($request);
+        $data = CreateDeviceRequest::fromRequest($request);
         return Device::create($data);
     }
 
-    public function update(UpdateDeviceData $data, $deviceId)
+    public function update(UpdateDeviceData $data)
     {
         $user = Auth::user();
-        $device = Device::find($deviceId);
+        $device = Device::find($data->device_id);
         abort_unless((bool)$device, 404, "Device not found");
         $device->serial_number = $data->serial_number;
         if (!empty($data->address_id)) {
             if ($user->role!=User::USER_ROLE_ADMIN) {
-                abort(401, "U must be an admin to do this");
+                abort(401, "You must be an admin to do this");
             }
             $device->address_id = $data->address_id;
         }
@@ -40,11 +42,6 @@ class DeviceAction
         $device = Device::find($device_id);
         abort_unless((bool)$device, 404, 'Device not found');
         $device->delete();
-        return $device;
-    }
-    public function find($device_id)
-    {
-        $device = Device::find($device_id);
         return $device;
     }
 }

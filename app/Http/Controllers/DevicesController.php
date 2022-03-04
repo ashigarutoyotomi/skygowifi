@@ -42,7 +42,7 @@ class DevicesController extends Controller
     public function store(CreateDeviceRequest $request)
     {
         $user = Auth::user();
-        $data = CreateDeviceData::fromRequest($request,1);
+        $data = CreateDeviceData::fromRequest($request,$user->id);
         if (!empty($request->csv)
         &&
         $request->file('csv')->isValid()) {
@@ -63,7 +63,10 @@ class DevicesController extends Controller
                     'address_id' =>$request->address_id,
                     'creator_id'=>$user->id,
                 ]);
-                $devices[]=(new DeviceAction)->create($data);                
+                $device = Device::where('serial_number',$row[0])->first();
+                if($device!=null){
+                    $devices[]=(new DeviceAction)->create($data);
+                }      
             }
             return $devices;
         }
