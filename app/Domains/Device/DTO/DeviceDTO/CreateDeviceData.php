@@ -18,7 +18,7 @@ class CreateDeviceData extends DataTransferObject
         $data = [
             'address_id' => $request->address_id,
             'serial_number' => $request->serial_number,
-            'creator_id' => 1
+            'creator_id' => $user->id
         ];
 
         return new self($data);

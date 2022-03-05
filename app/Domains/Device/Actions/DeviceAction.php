@@ -18,9 +18,10 @@ class DeviceAction
      */
     public function create(CreateDeviceData $data)
     {
+        $user = Auth::user();
         return Device::create([
             'address_id' => $data->address_id,
-            'creator_id' => 1,
+            'creator_id' => $user->id,
             'serial_number' => $data->serial_number,
         ]);
     }

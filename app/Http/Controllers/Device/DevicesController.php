@@ -66,6 +66,7 @@ class DevicesController extends Controller
                     $devices[]=(new DeviceAction)->create($data);
                 }      
             }
+            $device = (new DeviceAction)->create($data);
             return $devices;
         }
 

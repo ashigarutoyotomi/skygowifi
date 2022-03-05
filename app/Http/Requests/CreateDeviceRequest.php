@@ -29,7 +29,7 @@ class CreateDeviceRequest extends FormRequest
             ,
             'csv' =>"required_without:serial_number|file",
             'address_id'=>'required|integer',
-        ];
+        ];                                                                                                                                  
     }
     public function messages (){
         return [
