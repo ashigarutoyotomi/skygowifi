@@ -48,8 +48,7 @@ class DevicesController extends Controller
         return (new DeviceAction)->create($data,$user_id);
     }
     public function storeCsv(CreateDeviceCsvRequest $request)
-    {      $user_id = Auth::user()->id;  
-        $data = CreateDeviceCsvData::fromRequest($request);
+    {   $user_id = Auth::user()->id;          
         if ($request->file('csv')->isValid()) {
             $devices = [];
             if ($request->csv->getClientOriginalExtension()!='csv') {
@@ -58,13 +57,13 @@ class DevicesController extends Controller
             $path = $request->csv->storeAs('csv', md5(time()).'csv');
             $handle = fopen(base_path('storage/app/'.$path), 'r');
             $i = 0;
-            while (($row = fgetcsv($handle))) {
+            while (($row = fgetcsv($handle))) {                
                 if ($i ==0) {
                     $i++;
                     continue;
                 }
-
                 $device = Device::where('serial_number', $row[0])->first();
+                $data = CreateDeviceCsvData::fromRequest($request);
                 $data->serial_number = $row[0];
                 
                 if (!(bool)$device) {

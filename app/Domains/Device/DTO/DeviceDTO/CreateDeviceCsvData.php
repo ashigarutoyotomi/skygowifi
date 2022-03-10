@@ -8,7 +8,6 @@ use App\Http\Requests\CreateDeviceCsvRequest;
 use Illuminate\Support\Facades\Auth;
 class CreateDeviceCsvData extends DataTransferObject
 {
-    public string $serial_number;
     public int $creator_id;
     public string $address_id;
 
@@ -17,7 +16,6 @@ class CreateDeviceCsvData extends DataTransferObject
         $user = Auth::user();
         $data = [
             'address_id' => $request->address_id,
-            'serial_number' => $request->serial_number,
             'creator_id' => $user->id
         ];
 
