@@ -35,11 +35,10 @@ class DeviceAction
             'serial_number' => $data->serial_number,
         ]);
     }
-    public function update(UpdateDeviceData $data)
+    public function update(UpdateDeviceData $data,$device)
     {
         $user = Auth::user();
-        $device = Device::find($device_id);
-        abort_unless((bool)$device, 404, "Device not found");
+        $device = $device;
         $device->serial_number = $data->serial_number;
         if ($data->address_id==$device->address_id){
             ;

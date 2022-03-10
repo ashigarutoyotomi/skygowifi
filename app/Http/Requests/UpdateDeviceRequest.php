@@ -24,7 +24,7 @@ class UpdateDeviceRequest extends FormRequest
     public function rules()
     {
         return [
-            'serial_number'=>'nullable|string'
+            'serial_number'=>'required|string'
             ,
             'address_id' =>"required|integer"
         ];

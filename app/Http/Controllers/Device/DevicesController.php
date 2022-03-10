@@ -81,11 +81,8 @@ class DevicesController extends Controller
         $device = Device::find($device_id);
         abort_unless((bool)$device, 404, 'Device not found');
 
-        $device = (new DeviceAction)->update($data);
+        $device = (new DeviceAction)->update($data,$device);
 
-        $device->serial_number = $data->serial_number;
-        $device->save();
-        ;
         return $device;
     }
     public function delete($device_id)
