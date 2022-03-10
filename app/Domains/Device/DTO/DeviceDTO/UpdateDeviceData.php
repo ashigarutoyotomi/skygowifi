@@ -7,8 +7,8 @@ use App\Http\Requests\UpdateDeviceRequest;
 
 class UpdateDeviceData extends DataTransferObject
 {
-    public ?int $address_id;
-    public ?string $serial_number;
+    public int $address_id;
+    public string $serial_number;
 
     public static function fromRequest(
         UpdateDeviceRequest $request

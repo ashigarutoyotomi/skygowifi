@@ -8,7 +8,7 @@ use App\Http\Requests\CreateDeviceRequest;
 use Illuminate\Support\Facades\Auth;
 class CreateDeviceData extends DataTransferObject
 {
-    public ?string $serial_number;
+    public string $serial_number;
     public int $creator_id;
     public string $address_id;
 
