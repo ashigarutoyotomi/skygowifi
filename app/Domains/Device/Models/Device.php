@@ -17,6 +17,6 @@ class Device extends Model
         return $this->belongsTo(User::class,'creator_id');
     }
     public function address(){
-        return $this->belongsTo(Address::class,'id');
+        return $this->belongsTo(Address::class,'address_id');
     }
 }

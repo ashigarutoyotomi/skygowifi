@@ -14,8 +14,8 @@ class CreateDevicesTable extends Migration
             $table->string("serial_number");
             $table->unsignedBigInteger("creator_id");
             $table->unsignedBigInteger("address_id");
-            $table->foreign('creator_id')->references('id')->on('users');
-            $table->foreign("address_id")->references("id")->on('addresses');
+            // $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign("address_id")->references("id")->on('addresses')->onDelete('cascade');
         });
     }
 

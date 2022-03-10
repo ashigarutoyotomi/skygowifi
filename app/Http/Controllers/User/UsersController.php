@@ -47,18 +47,16 @@ class UsersController extends Controller
 
     public function show($userId)
     {
-        $user = (new UserGateway)->find($userId);
+        $user = (new UserGateway)->with('devices')->find($userId);
         abort_unless((bool)$user, 404, 'User not found');
-        $devices = $user->devices;
-        return [$user,$devices];
+        return $user;
     }
 
     public function edit( $userId)
     {
-        $user = (new UserGateway)->edit($userId);
+        $user = (new UserGateway)->with('devices')->edit($userId);
         abort_unless((bool)$user, 404, 'User not found');
-        $devices = $user->devices;
-        return [$user,$devices];        
+        return $user;        
     }
 
     public function update(UpdateUserRequest $request, $userId)

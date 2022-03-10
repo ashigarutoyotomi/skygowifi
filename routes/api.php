@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => '/devices'], function () {
         Route::get('/', [DevicesController::class , 'index']);
         Route::post('/store', [DevicesController::class , 'store']);
+        Route::post('/storeCsv', [DevicesController::class , 'storeCsv']);
         Route::get('/{id}/show', [DevicesController::class , 'show']);
         Route::get('/{id}/edit', [DevicesController::class , 'edit']);
         Route::post('/{id}/update', [DevicesController::class , "update"]);

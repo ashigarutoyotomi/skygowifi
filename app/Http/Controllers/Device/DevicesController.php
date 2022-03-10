@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Device;
 
 use App\Domains\Device\Actions\DeviceAction;
 use App\Domains\Device\DTO\DeviceDTO\CreateDeviceData;
+use App\Domains\Device\DTO\DeviceDTO\CreateDeviceCsvData;
 use App\Http\Requests\UpdateDeviceRequest;
 use App\Domains\Device\Gateways\DeviceGateway;
 use App\Domains\Device\Models\Device;
 use App\Http\Requests\CreateDeviceRequest;
+use App\Http\Requests\CreateDeviceCsvRequest;
 use Illuminate\Http\Request;
 use App\Domains\Device\DTO\DeviceDTO\UpdateDeviceData;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+
 class DevicesController extends Controller
 {
     public function index(Request $request)
@@ -31,21 +34,26 @@ class DevicesController extends Controller
     }
     public function edit($device_id)
     {
-        $device = (new DeviceGateway)->with('creator')->edit($device_id); 
+        $device = (new DeviceGateway)->with('creator')->edit($device_id);
         return $device;
     }
     public function show($device_id)
     {
-        $device = (new DeviceGateway)->with('creator')->edit($device_id); 
+        $device = (new DeviceGateway)->with('creator')->edit($device_id);
         return $device;
     }
     public function store(CreateDeviceRequest $request)
     {
-        $user = Auth::user(); 
-        $data = CreateDeviceData::fromRequest($request);                  
-        if (!empty($request->csv)
-        &&
-        $request->file('csv')->isValid()) {
+        $user = Auth::user();
+        $data = CreateDeviceData::fromRequest($request);
+
+        return (new DeviceAction)->create($data, $user);
+    }
+    public function storeCsv(CreateDeviceCsvRequest $request)
+    {
+        $user = Auth::user();
+        $data = CreateDeviceCsvData::fromRequest($request);
+        if ($request->file('csv')->isValid()) {
             $devices = [];
             if ($request->csv->getClientOriginalExtension()!='csv') {
                 abort(403, 'File extension must be csv');
@@ -57,29 +65,26 @@ class DevicesController extends Controller
                 if ($i ==0) {
                     $i++;
                     continue;
-                }                
+                }
 
-                $device = Device::where('serial_number',$row[0])->first();
+                $device = Device::where('serial_number', $row[0])->first();
                 $data->serial_number = $row[0];
                 
-                if(!(bool)$device){
-                    $devices[]=(new DeviceAction)->create($data);
-                }      
+                if (!(bool)$device) {
+                    $devices[]=(new DeviceAction)->createCsv($data, $user);
+                }
             }
-            $device = (new DeviceAction)->create($data);
             return $devices;
         }
-
-        return (new DeviceAction)->create($data);
     }
     public function update(UpdateDeviceRequest $request, $device_id)
     {
-        $data = UpdateDeviceData::fromRequest($request,$device_id);
+        $data = UpdateDeviceData::fromRequest($request, $device_id);
 
         $device = Device::find($device_id);
         abort_unless((bool)$device, 404, 'Device not found');
 
-        $device = (new DeviceAction)->update($data,$device_id);        
+        $device = (new DeviceAction)->update($data, $device_id);
 
         $device->serial_number = $data->serial_number;
         $device->save();

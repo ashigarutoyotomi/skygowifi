@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateDeviceRequest;
 
 class UpdateDeviceData extends DataTransferObject
 {
-    public ?string $address_id;
+    public ?int $address_id;
     public ?string $serial_number;
 
     public static function fromRequest(
@@ -15,7 +15,7 @@ class UpdateDeviceData extends DataTransferObject
     ) : UpdateDeviceData {
         $data = [
         'serial_number' => $request->get('serial_number'),
-        'address_id' => $request->get('address_id')
+        'address_id' => (int)$request->get('address_id')
     ];
         return new self($data);
     }
