@@ -65,8 +65,11 @@ class DevicesController extends Controller
 
                 $device = Device::where('serial_number', $row[0])->first();
 
-                $request->serial_number = $row[0];
-                $data = CreateDeviceData::fromRequest($request);
+                $data = new CreateDeviceData([
+                    'address_id' =>$request->address_id,
+                    'creator_id'=>Auth::user()->id,
+                    'serial_number'=>$row[0]
+                ]);
                 
                 if (!(bool)$device) {
                     $devices[]=(new DeviceAction)->create($data);
