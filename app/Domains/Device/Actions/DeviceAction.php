@@ -25,7 +25,7 @@ class DeviceAction
             'serial_number' => $data->serial_number,
         ]);
     }
-    public function createCsv(CreateDeviceCsvData $data)
+    public function createCsv(CreateDeviceData $data)
     {        
         return Device::create([
             'address_id' => $data->address_id,

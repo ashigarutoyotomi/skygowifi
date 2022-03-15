@@ -42,12 +42,11 @@ class DevicesController extends Controller
         $device = (new DeviceGateway)->with('creator')->edit($device_id);
         return $device;
     }
-    public function store(CreateDeviceRequest $request)
-    {   $user_id = Auth::user()->id;
+    public function store(CreateDeviceRequest $request)    {   
         $data = CreateDeviceData::fromRequest($request);
-        return (new DeviceAction)->create($data,$user_id);
+        return (new DeviceAction)->create($data);
     }
-    public function storeCsv(CreateDeviceCsvRequest $request)
+    public function storeCsv(CreateDeviceRequest $request)
     {   $user_id = Auth::user()->id;          
         if ($request->file('csv')->isValid()) {
             $devices = [];
@@ -63,11 +62,11 @@ class DevicesController extends Controller
                     continue;
                 }
                 $device = Device::where('serial_number', $row[0])->first();
-                $data = CreateDeviceCsvData::fromRequest($request);
+                $data = CreateDeviceData::fromRequest($request);
                 $data->serial_number = $row[0];
                 
                 if (!(bool)$device) {
-                    $devices[]=(new DeviceAction)->createCsv($data,$user_id);
+                    $devices[]=(new DeviceAction)->createCsv($data);
                 }
             }
             return $devices;
