@@ -42,12 +42,13 @@ class DevicesController extends Controller
         $device = (new DeviceGateway)->with('creator')->edit($device_id);
         return $device;
     }
-    public function store(CreateDeviceRequest $request)    {   
+    public function store(CreateDeviceRequest $request)
+    {
         $data = CreateDeviceData::fromRequest($request);
         return (new DeviceAction)->create($data);
     }
-    public function storeCsv(CreateDeviceRequest $request)
-    {   $user_id = Auth::user()->id;          
+    public function storeCsv(CreateDeviceCsvRequest $request)
+    {
         if ($request->file('csv')->isValid()) {
             $devices = [];
             if ($request->csv->getClientOriginalExtension()!='csv') {
@@ -56,25 +57,27 @@ class DevicesController extends Controller
             $path = $request->csv->storeAs('csv', md5(time()).'csv');
             $handle = fopen(base_path('storage/app/'.$path), 'r');
             $i = 0;
-            while (($row = fgetcsv($handle))) {                
+            while (($row = fgetcsv($handle))) {
                 if ($i ==0) {
                     $i++;
                     continue;
                 }
+
                 $device = Device::where('serial_number', $row[0])->first();
+
+                $request->serial_number = $row[0];
                 $data = CreateDeviceData::fromRequest($request);
-                $data->serial_number = $row[0];
                 
                 if (!(bool)$device) {
-                    $devices[]=(new DeviceAction)->createCsv($data);
+                    $devices[]=(new DeviceAction)->create($data);
                 }
             }
             return $devices;
         }
     }
-    public function update(UpdateDeviceRequest $request,$device_id)
+    public function update(UpdateDeviceRequest $request, $device_id)
     {
-        $data = UpdateDeviceData::fromRequest($request,$device_id);        
+        $data = UpdateDeviceData::fromRequest($request, $device_id);
 
         $device = (new DeviceAction)->update($data);
 
