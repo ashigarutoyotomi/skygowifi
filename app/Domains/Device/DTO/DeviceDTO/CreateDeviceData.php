@@ -24,15 +24,4 @@ class CreateDeviceData extends DataTransferObject
 
         return new self($data);
     }
-    public static function fromCsvRequest(CreateDeviceCsvRequest $request) : CreateDeviceData
-    {
-        $user = Auth::user();
-        $data = [
-            'address_id' => $request->address_id,
-            'creator_id' => $user->id,
-            'serial_number'=> $request->serial_number
-        ];
-
-        return new self($data);
-    }
 }
