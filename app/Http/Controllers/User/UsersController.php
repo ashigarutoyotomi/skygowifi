@@ -47,14 +47,14 @@ class UsersController extends Controller
 
     public function show($userId)
     {
-        $user = UserGateway::find($userId);
+        $user = (new UserGateway)->find($userId);
         abort_unless((bool)$user, 404, 'User not found');
         return $user;
     }
 
     public function edit( $userId)
     {
-        $user = UserGateway::edit($userId);
+        $user = (new UserGateway)->edit($userId);
         abort_unless((bool)$user, 404, 'User not found');
         return $user;        
     }

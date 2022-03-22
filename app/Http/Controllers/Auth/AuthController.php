@@ -77,12 +77,12 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
+        
         $user = User::where(
             'email',
             $credentials['email']
         )->first();
-        $match = Hash::check($request->password, $user->password);
-        
+        $match = Hash::check( $credentials['password'],$user->password);  
         if ($user && $match) {
             $token = $user->createToken('access-token')->plainTextToken;
 
