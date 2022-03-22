@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Address\AddressesController;
+use App\Http\Controllers\Coupon\CouponsController;
 use App\Http\Controllers\Country\CountriesController;
 use App\Http\Controllers\City\CitiesController;
 use App\Http\Controllers\User\UsersController;
@@ -84,5 +85,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}/show', [CitiesController::class , 'show']);
         Route::get('/{id}/edit', [CitiesController::class , 'edit']);
         Route::delete('/{id}/delete', [CitiesController::class , 'delete']);
+    });
+
+    //coupons crud
+    Route::group(['prefix' => '/coupons'], function () {
+        Route::get('/', [CouponsController::class , 'index']);
+        Route::post('/store', [CouponsController::class , 'store']);
+        Route::get('/{id}/show', [CouponsController::class , 'show']);
+        Route::get('/{id}/edit', [CouponsController::class , 'edit']);
+        Route::post('/{id}/update', [CouponsController::class , "update"]);
+        Route::delete('/{id}/delete', [CouponsController::class , 'delete']);
     });
 }); 
