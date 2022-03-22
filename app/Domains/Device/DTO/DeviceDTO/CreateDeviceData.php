@@ -5,6 +5,7 @@ namespace App\Domains\Device\DTO\DeviceDTO;
 use App\Http\Requests\DeviceRequest;
 use Spatie\DataTransferObject\DataTransferObject;
 use App\Http\Requests\CreateDeviceRequest;
+use App\Http\Requests\CreateDeviceCsvRequest;
 use Illuminate\Support\Facades\Auth;
 class CreateDeviceData extends DataTransferObject
 {

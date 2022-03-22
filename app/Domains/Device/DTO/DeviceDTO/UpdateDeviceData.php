@@ -17,7 +17,7 @@ class UpdateDeviceData extends DataTransferObject
         $data = [
         'serial_number' => $request->get('serial_number'),
         'address_id' => (int)$request->get('address_id'),
-        'device_id'=>$device_id
+        'device_id'=>(int)$device_id
     ];
         return new self($data);
     }

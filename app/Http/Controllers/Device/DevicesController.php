@@ -43,13 +43,12 @@ class DevicesController extends Controller
         return $device;
     }
     public function store(CreateDeviceRequest $request)
-    {   $user_id = Auth::user()->id;
+    {
         $data = CreateDeviceData::fromRequest($request);
-        return (new DeviceAction)->create($data,$user_id);
+        return (new DeviceAction)->create($data);
     }
     public function storeCsv(CreateDeviceCsvRequest $request)
-    {      $user_id = Auth::user()->id;  
-        $data = CreateDeviceCsvData::fromRequest($request);
+    {
         if ($request->file('csv')->isValid()) {
             $devices = [];
             if ($request->csv->getClientOriginalExtension()!='csv') {
@@ -65,18 +64,23 @@ class DevicesController extends Controller
                 }
 
                 $device = Device::where('serial_number', $row[0])->first();
-                $data->serial_number = $row[0];
+
+                $data = new CreateDeviceData([
+                    'address_id' =>$request->address_id,
+                    'creator_id'=>Auth::user()->id,
+                    'serial_number'=>$row[0]
+                ]);
                 
                 if (!(bool)$device) {
-                    $devices[]=(new DeviceAction)->createCsv($data,$user_id);
+                    $devices[]=(new DeviceAction)->create($data);
                 }
             }
             return $devices;
         }
     }
-    public function update(UpdateDeviceRequest $request,$device_id)
+    public function update(UpdateDeviceRequest $request, $device_id)
     {
-        $data = UpdateDeviceData::fromRequest($request,$device_id);        
+        $data = UpdateDeviceData::fromRequest($request, $device_id);
 
         $device = (new DeviceAction)->update($data);
 
