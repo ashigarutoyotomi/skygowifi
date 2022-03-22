@@ -5,6 +5,7 @@ namespace App\Domains\Coupon\Actions;
 use App\Domains\Coupon\DTO\CouponDTO\CreateCouponData;
 use App\Domains\Coupon\DTO\CouponDTO\UpdateCouponData;
 use App\Domains\Coupon\Models\Coupon;
+
 class CouponAction
 {
     /**
@@ -27,19 +28,20 @@ class CouponAction
         abort_unless((bool)$coupon, 404, 'Coupon not found');
 
         $coupon->flat_amount_off = $data->flat_amount_off;
-        if(!empty($data->dealer_id)){
-            $coupon->dealer_id = $data->dealer_id;
+
+        $coupon->dealer_id = $data->dealer_id;
         
-        }
-        $coupon->flat_amount_off= $data->flat_amount_off;
+        $coupon->percentage_off = $data->percentage_off;
+
         $coupon->save();
 
         return $coupon;
     }
-    public function delete($coupon_id){
+    public function delete($coupon_id)
+    {
         $coupon = Coupon::find($coupon_id);
-        abort_unless((bool) $coupon, 404, 'Coupon not found');   
-        $coupon->delete();     
+        abort_unless((bool) $coupon, 404, 'Coupon not found');
+        $coupon->delete();
         return $coupon;
     }
 }

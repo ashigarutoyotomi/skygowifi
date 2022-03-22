@@ -19,22 +19,18 @@ class CouponsController extends Controller
         $filters = json_decode($request->get('filters'),true);
         if(!empty($filters)){
                 $gateway->setFilters($filters);
-        }
-        // $keywords =$request->get('keywords');
-        // if($keywords){
-        //         $gateway->setSearch($keywords,['text']); 
-        // } 
-        $Coupons = $gateway->all();
-        return $Coupons;
+        }        
+        $coupons = $gateway->all();
+        return $coupons;
     }
     public function edit($coupon_id)
     {
-        $coupon = (new CouponGateway)->with(['country','city'])->edit($coupon_id);
+        $coupon = (new CouponGateway)->with(['dealer'])->edit($coupon_id);
         return $coupon;
     }
     public function show($coupon_id)
     {
-        $coupon = (new CouponGateway)->with(['user'])->edit($coupon_id);
+        $coupon = (new CouponGateway)->with(['dealer'])->edit($coupon_id);
         return $coupon;
     }
     public function store(CreateCouponRequest $request)

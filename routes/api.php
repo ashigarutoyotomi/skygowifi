@@ -1,14 +1,14 @@
 <?php
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Address\AddressesController;
 use App\Http\Controllers\Coupon\CouponsController;
 use App\Http\Controllers\Country\CountriesController;
-use App\Http\Controllers\City\CitiesController;
 use App\Http\Controllers\User\UsersController;
 use App\Http\Controllers\Device\DevicesController;
+use App\Http\Controllers\City\CitiesController;
 
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
@@ -38,9 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}/update', [DevicesController::class , "update"]);
         Route::delete('/{id}/delete', [DevicesController::class , 'delete']);
     });
-     //users crud
+    //users crud
 
-     Route::group(['prefix' => '/users'], function () {
+    Route::group(['prefix' => '/users'], function () {
         Route::get('/', [UsersController::class , 'index']);
         Route::post('/store', [UsersController::class , 'store']);
         Route::get('/{id}/show', [UsersController::class , 'show']);
@@ -53,13 +53,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(
         ['prefix' => '/addresses'],
         function () {
-        Route::get('/', [AddressesController::class , 'index']);
-        Route::post('/store', [AddressesController::class , 'store']);
-        Route::post('/{id}/update', [AddressesController::class , 'update']);
-        Route::get('/{id}/show', [AddressesController::class , 'show']);
-        Route::get('/{id}/edit', [AddressesController::class , 'edit']);
-        Route::delete('/{id}/delete', [AddressesController::class , 'delete']);
-    }
+            Route::get('/', [AddressesController::class , 'index']);
+            Route::post('/store', [AddressesController::class , 'store']);
+            Route::post('/{id}/update', [AddressesController::class , 'update']);
+            Route::get('/{id}/show', [AddressesController::class , 'show']);
+            Route::get('/{id}/edit', [AddressesController::class , 'edit']);
+            Route::delete('/{id}/delete', [AddressesController::class , 'delete']);
+        }
     );
 
     //countries
@@ -67,13 +67,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(
         ['prefix' => '/countries'],
         function () {
-        Route::get('/', [CountriesController::class , 'index']);
-        Route::post('/store', [CountriesController::class , 'store']);
-        Route::post('/{id}/update', [CountriesController::class , 'update']);
-        Route::get('/{id}/show', [CountriesController::class , 'show']);
-        Route::get('/{id}/edit', [CountriesController::class , 'edit']);
-        Route::delete('/{id}/delete', [CountriesController::class , 'delete']);
-    }
+            Route::get('/', [CountriesController::class , 'index']);
+            Route::post('/store', [CountriesController::class , 'store']);
+            Route::post('/{id}/update', [CountriesController::class , 'update']);
+            Route::get('/{id}/show', [CountriesController::class , 'show']);
+            Route::get('/{id}/edit', [CountriesController::class , 'edit']);
+            Route::delete('/{id}/delete', [CountriesController::class , 'delete']);
+        }
     );
 
     //cities
@@ -96,4 +96,4 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}/update', [CouponsController::class , "update"]);
         Route::delete('/{id}/delete', [CouponsController::class , 'delete']);
     });
-}); 
+});
