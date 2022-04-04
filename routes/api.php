@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Address\AddressesController;
+use App\Http\Controllers\Affiliate\AffiliatesController;
 use App\Http\Controllers\Coupon\CouponsController;
 use App\Http\Controllers\Country\CountriesController;
 use App\Http\Controllers\User\UsersController;
@@ -76,5 +77,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}/edit', [CountriesController::class , 'edit']);
         Route::post('/{id}/update', [CountriesController::class , "update"]);
         Route::delete('/{id}/delete', [CountriesController::class , 'delete']);
+    });
+
+    //affiliates crud
+
+    Route::group(['prefix' => '/affiliates'], function () {
+        Route::get('/', [AffiliatesController::class , 'index']);
+        Route::post('/store', [AffiliatesController::class , 'store']);
+        Route::get('/{id}/show', [AffiliatesController::class , 'show']);
+        Route::get('/{id}/edit', [AffiliatesController::class , 'edit']);
+        Route::post('/{id}/update', [AffiliatesController::class , "update"]);
+        Route::delete('/{id}/delete', [AffiliatesController::class , 'delete']);
     });
 });
