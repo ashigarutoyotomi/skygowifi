@@ -18,7 +18,7 @@ use App\Http\Requests\UpdateAffiliateRequest;
 class AffiliatesController extends Controller
 {
     /**
-     * Get all users
+     * Get all affiliates
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
@@ -65,9 +65,9 @@ class AffiliatesController extends Controller
     {
         $affiliate = (new AffiliateAction)->find($affiliateId);
 
-        $data = (UpdateAffiliateData::fromRequest($request));
+        $data = UpdateAffiliateData::fromRequest($request,$affiliateId);
 
-        $affiliate = (new AffiliateAction)->update($data, $affiliateId);
+        $affiliate = (new AffiliateAction)->update($data);
 
         return $affiliate;
     }

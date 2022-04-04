@@ -25,18 +25,7 @@ class AffiliateGateway
 
         return $query;
     }
-    // public static function appendFilters($query)
-    // {
-    //     if (!empty($filters['start_created_at'])) {
-    //         $query->where('created_at', '>=', $filters['start_created_at']);
-    //     }
-
-    //     if (!empty($filters['end_created_at'])) {
-    //         $query->where('created_at', '<=',  $filters['end_created_at']);
-    //     }
-    //     return $query;
-    // }
-
+    
     public function all(){        
         $query = Affiliate::query();        
         if ($this->search['keywords'] && count($this->search['columns'])) {

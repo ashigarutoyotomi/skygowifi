@@ -24,13 +24,17 @@ class AffiliateAction
         ]);
     }
 
-    public function update(UpdateAffiliateData $data, $affiliateId)
+    public function update(UpdateAffiliateData $data)
     {
-        $affiliate = Affiliate::find($affiliateId);
+        $affiliate = Affiliate::find($data->id);
         abort_unless((bool)$affiliate, 404, "Affiliate not found");
+
         $affiliate->first_name = $data->first_name;
+
         $affiliate->last_name = $data->last_name;
+        
         $affiliate->email = $data->email;
+
         if (!empty($data->password)) {
             $affiliate->password= Hash::make($data->password);
         }
