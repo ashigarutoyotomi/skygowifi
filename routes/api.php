@@ -3,13 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Address\AddressesController;
+use App\Http\Controllers\Setting\SettingsController;
 use App\Http\Controllers\Affiliate\AffiliatesController;
 use App\Http\Controllers\Coupon\CouponsController;
 use App\Http\Controllers\Country\CountriesController;
 use App\Http\Controllers\User\UsersController;
 use App\Http\Controllers\Device\DevicesController;
 use App\Http\Controllers\City\CitiesController;
-
 
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
@@ -58,7 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}/edit', [CitiesController::class , 'edit']);
         Route::post('/{id}/update', [CitiesController::class , "update"]);
         Route::delete('/{id}/delete', [CitiesController::class , 'delete']);
-    });  
+    });
 
     //coupons crud
     Route::group(['prefix' => '/coupons'], function () {
@@ -89,4 +89,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}/update', [AffiliatesController::class , "update"]);
         Route::delete('/{id}/delete', [AffiliatesController::class , 'delete']);
     });
+    //setting update
+    Route::group(
+        ['prefix'=>'settings'],
+        function () {
+        Route::post('/update', [SettingsController::class ,'update']);
+        Route::get('/', [SettingsController::class ,'index']);
+        // Route::get('/show',[SettingsController::class,'show']);
+    }
+    );
 });
