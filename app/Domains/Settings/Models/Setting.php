@@ -21,5 +21,5 @@ class Setting extends Model
     const TYPE_BOOLEAN = 1;
 
     const AFFILIATE_LINK_EXPIRY_TIME = "affiliate_link_expiry_time";
-    const AFFILIATE_LINK_SALE_SOMISSION = 'affiliate_link_sale_commission';
+    const AFFILIATE_LINK_SALE_COMISSION = 'affiliate_link_sale_commission';
 }
