@@ -28,7 +28,7 @@ class SettingsTableSeeder extends Seeder
         $rowSale = DB::table('settings')->where('key','affiliate_link_sale_commission')->first();
         if ($rowSale==null) {
             DB::table('settings')->insert([
-            'key'=>Setting::AFFILIATE_LINK_SALE_SOMISSION,
+            'key'=>Setting::AFFILIATE_LINK_SALE_COMISSION,
             'title'=>'Commission of sale using affiliate link',
             'type'=>Setting::TYPE_NUMBER,
             'value'=>10,
