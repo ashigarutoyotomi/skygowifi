@@ -20,6 +20,6 @@ class Setting extends Model
     const TYPE_NUMBER = 2;
     const TYPE_BOOLEAN = 1;
 
-    const LINK_EXPIRY = "affiliate_link_expiry_time";
-    const LINK_SALE = 'affiliate_link_sale_commission';
+    const AFFILIATE_LINK_EXPIRY_TIME = "affiliate_link_expiry_time";
+    const AFFILIATE_LINK_SALE_SOMISSION = 'affiliate_link_sale_commission';
 }
