@@ -8,7 +8,6 @@ class UpdateSettingData extends DataTransferObject
 {
     public string $key;
     public string $value;
-
     public static function fromRequest(
     UpdateSettingRequest $request) : UpdateSettingData {
     $data = [

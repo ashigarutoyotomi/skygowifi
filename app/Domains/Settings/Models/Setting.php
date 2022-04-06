@@ -19,4 +19,7 @@ class Setting extends Model
     ];
     const TYPE_NUMBER = 2;
     const TYPE_BOOLEAN = 1;
+
+    const LINK_EXPIRY = "affiliate_link_expiry_time";
+    const LINK_SALE = 'affiliate_link_sale_commission';
 }

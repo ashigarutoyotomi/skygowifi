@@ -90,6 +90,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{id}/delete', [AffiliatesController::class , 'delete']);
     });
     //setting update
-    Route::post('/settings/update', [SettingsController::class ,'update']);
-    Route::get('/settings', [SettingsController::class ,'index']);
+    Route::group(
+        ['prefix'=>'settings'],
+        function () {
+        Route::post('/update', [SettingsController::class ,'update']);
+        Route::get('/', [SettingsController::class ,'index']);
+        Route::get('/show',[SettingsController::class,'show']);
+    }
+    );
 });

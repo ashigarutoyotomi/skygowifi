@@ -13,19 +13,27 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('settings')->insert([
-            'key'=>'affiliate_link_expiry_time',
-            'title'=>'Expiry Time',
-            'type'=>Setting::TYPE_NUMBER,
-            'value'=>0,
-            'section'=>'affiliate',
-        ]);
-        DB::table('settings')->insert([
+        $row = DB::where('key','affiliate_link_expiry_time')->first();
+        if($row==null){
+            DB::table('settings')->insert([
+                'key'=>'affiliate_link_expiry_time',
+                'title'=>'Expiry Time',
+                'type'=>Setting::TYPE_NUMBER,
+                'value'=>0,
+                'section'=>'affiliate',
+                'created_at'=>now(),
+            ]);
+        }
+        $row1 = DB::where('key','affiliate_link_sale_commission')->first();
+        if ($row1==null) {
+            DB::table('settings')->insert([
             'key'=>'affiliate_link_sale_commission',
             'title'=>'Commission of sale using affiliate link',
             'type'=>Setting::TYPE_NUMBER,
             'value'=>10,
             'section'=>'affiliate',
+            'created_at'=>now(),
         ]);
+        }
     }
 }
