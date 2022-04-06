@@ -30,7 +30,7 @@ class SettingsController extends Controller
 
         return $setting;
     }   
-    public function show(Request $request){
-        return (new SettingsGateway)->find($request->key);
-    }
+    // public function show(Request $request){
+    //     return (new SettingsGateway)->find($request->key);
+    // }
 }

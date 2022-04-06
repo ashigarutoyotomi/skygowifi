@@ -12,10 +12,9 @@ class SettingsGateway
         return $settings;
     }
     
-    public function find($key)
+    public function findByKey($key)
     {
         $setting = Setting::where('key',$key)->first();
-        abort_unless((bool)$setting,404,'Setting not found');
         return $setting;
     }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use App\Domains\Settings\Models\Setting;
+use Illuminate\Support\Facades\Log;
 class SettingsTableSeeder extends Seeder
 {
     /**
@@ -13,10 +14,10 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        $row = DB::where('key','affiliate_link_expiry_time')->first();
-        if($row==null){
+        $rowExpiry = DB::table('settings')->where('key','affiliate_link_expiry_time')->first();
+        if($rowExpiry==null){
             DB::table('settings')->insert([
-                'key'=>'affiliate_link_expiry_time',
+                'key'=>Setting::LINK_EXPIRY,
                 'title'=>'Expiry Time',
                 'type'=>Setting::TYPE_NUMBER,
                 'value'=>0,
@@ -24,10 +25,10 @@ class SettingsTableSeeder extends Seeder
                 'created_at'=>now(),
             ]);
         }
-        $row1 = DB::where('key','affiliate_link_sale_commission')->first();
-        if ($row1==null) {
+        $rowSale = DB::table('settings')->where('key','affiliate_link_sale_commission')->first();
+        if ($rowSale==null) {
             DB::table('settings')->insert([
-            'key'=>'affiliate_link_sale_commission',
+            'key'=>Setting::LINK_SALE,
             'title'=>'Commission of sale using affiliate link',
             'type'=>Setting::TYPE_NUMBER,
             'value'=>10,
