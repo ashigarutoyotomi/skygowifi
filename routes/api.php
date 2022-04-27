@@ -91,12 +91,14 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     //setting update
     Route::group(
-        ['prefix'=>'settings'],
+        ['prefix'=>'/settings'],
         function () {
         Route::post('/update', [SettingsController::class ,'update']);
         Route::get('/', [SettingsController::class ,'index']);
         // Route::get('/show',[SettingsController::class,'show']);
     }
     );
-    Route::post('/affiliateLinks/generate',[AffiliateLinksController::class,'generate']);
+    Route::group(['prefix'=>'/affiliate-links'], function () {
+        Route::post('/generate',[AffiliateLinksController::class,'generate']);
+    });
 });

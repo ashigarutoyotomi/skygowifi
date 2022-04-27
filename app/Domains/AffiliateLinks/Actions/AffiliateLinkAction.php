@@ -16,7 +16,7 @@ class AffiliateLinkAction
     {
         return AffiliateLink::create([
             'code' => $data->code,            
-            'status' => AffiliateLink::STATUS_NEW,
+            'status' => $data->status,
             'affiliate_id'=>$data->affiliate_id
         ]);
     }

@@ -30,7 +30,7 @@ class AffiliateLinksController extends Controller
         }
         $keywords =$request->get('keywords');
         if ($keywords) {
-            $gateway->setSearch($keywords, ['first_name','last_name','email']);
+            $gateway->setSearch($keywords, ['code']);
         }
         $affiliates = $gateway->all();
         return $affiliates;
