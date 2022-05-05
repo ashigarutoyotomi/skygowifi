@@ -10,7 +10,7 @@ use App\Http\Controllers\Country\CountriesController;
 use App\Http\Controllers\User\UsersController;
 use App\Http\Controllers\Device\DevicesController;
 use App\Http\Controllers\City\CitiesController;
-
+use App\Http\Controllers\AffiliateLink\AffiliateLinksController;
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
 Route::post("/login", [AuthController::class , "login"]);
@@ -91,11 +91,14 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     //setting update
     Route::group(
-        ['prefix'=>'settings'],
+        ['prefix'=>'/settings'],
         function () {
         Route::post('/update', [SettingsController::class ,'update']);
         Route::get('/', [SettingsController::class ,'index']);
         // Route::get('/show',[SettingsController::class,'show']);
     }
     );
+    Route::group(['prefix'=>'/affiliate-links'], function () {
+        Route::post('/generate',[AffiliateLinksController::class,'generate']);
+    });
 });
