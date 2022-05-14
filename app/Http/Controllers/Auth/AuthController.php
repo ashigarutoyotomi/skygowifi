@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\Http\Requests\Auth\LoginRequest;
 use App\Domains\User\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -71,7 +71,7 @@ class AuthController extends Controller
      * @returns a response with token and user data on success,
      * if fail, returns only a message of failure
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $credentials = [
             'email' => $request->email,
@@ -82,6 +82,7 @@ class AuthController extends Controller
             'email',
             $credentials['email']
         )->first();
+        abort_unless((bool)$user,404,'User  not found');
         $match = Hash::check( $credentials['password'],$user->password);  
         if ($user && $match) {
             $token = $user->createToken('access-token')->plainTextToken;
