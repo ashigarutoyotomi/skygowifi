@@ -77,13 +77,13 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
-        
+
         $user = User::where(
             'email',
             $credentials['email']
         )->first();
-        abort_unless((bool)$user,404,'User  not found');
-        $match = Hash::check( $credentials['password'],$user->password);  
+        abort_unless((bool)$user,404,'User not found');
+        $match = Hash::check( $credentials['password'],$user->password);
         if ($user && $match) {
             $token = $user->createToken('access-token')->plainTextToken;
 
@@ -93,7 +93,7 @@ class AuthController extends Controller
                 'token' => $token,
             ]);
         }
-        
+
         return response([
             'message' => 'These credentials do not match our records.',
         ], 401);

@@ -23,21 +23,24 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $gateway = new UserGateway();
-        
+
         $filters = json_decode($request->get('filters'),true);
+
         if(!empty($filters)){
-                $gateway->setFilters($filters);
+            $gateway->setFilters($filters);
         }
+
         $keywords =$request->get('keywords');
+
         if($keywords){
-                $gateway->setSearch($keywords,['first_name','last_name','email']); 
-        } 
-        $users = $gateway->all();
-        return $users;
+            $gateway->setSearch($keywords,['first_name','last_name','email']);
+        }
+
+        return $gateway->paginate(20)->all();
     }
 
     public function store(CreateUserRequest $request)
-    {        
+    {
         $data = CreateUserData::fromRequest(($request));
 
         $user = (new UserAction)->create($data);
@@ -56,12 +59,12 @@ class UsersController extends Controller
     {
         $user = (new UserGateway)->edit($userId);
         abort_unless((bool)$user, 404, 'User not found');
-        return $user;        
+        return $user;
     }
 
     public function update(UpdateUserRequest $request, $userId)
     {
-        $user = UserAction::find($userId);        
+        $user = UserAction::find($userId);
 
         $data = (UpdateUserData::fromRequest($request));
 

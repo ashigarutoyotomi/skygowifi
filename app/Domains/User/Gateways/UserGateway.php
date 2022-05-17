@@ -25,34 +25,30 @@ class UserGateway
 
         return $query;
     }
-    // public static function appendFilters($query)
-    // {
-    //     if (!empty($filters['start_created_at'])) {
-    //         $query->where('created_at', '>=', $filters['start_created_at']);
-    //     }
 
-    //     if (!empty($filters['end_created_at'])) {
-    //         $query->where('created_at', '<=',  $filters['end_created_at']);
-    //     }
-    //     return $query;
-    // }
+    public function all(){
+        $query = User::query();
 
-    public function all(){        
-        $query = User::query();        
         if ($this->search['keywords'] && count($this->search['columns'])) {
             $this->appendSearch($query);
         }
-        
+
         if(count($this->filters)){
-            $query = $this->appendFilters($query);
+            $this->appendFilters($query);
         }
-        return $query->get(); 
+
+        if ($this->paginate) {
+            return $query->paginate($this->paginate);
+        }
+
+        return $query->get();
     }
 
     public function edit($id){
         $user = User::find($id);
         return $user;
     }
+
     public function find($id){
         return User::find($id);
     }
