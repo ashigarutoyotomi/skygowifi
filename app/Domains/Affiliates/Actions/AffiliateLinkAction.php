@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\AffiliateLinks\Actions;
+namespace App\Domains\Affiliates\Actions;
 
 use Illuminate\Support\Facades\Hash;
-use App\Domains\AffiliateLinks\DTO\AffiliateLinkDTO\CreateAffiliateLinkData;
-use App\Domains\AffiliateLinks\Models\AffiliateLink;
+use App\Domains\Affiliates\DTO\AffiliateLinkDTO\CreateAffiliateLinkData;
+use App\Domains\Affiliates\Models\AffiliateLink;
 class AffiliateLinkAction
 {
     /**

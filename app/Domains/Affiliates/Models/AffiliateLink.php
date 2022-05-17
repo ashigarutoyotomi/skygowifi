@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\AffiliateLinks\Models;
+namespace App\Domains\Affiliates\Models;
 
 use Illuminate\Database\Eloquent\Model;
 class AffiliateLink extends Model

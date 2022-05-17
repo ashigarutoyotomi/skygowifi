@@ -17,7 +17,7 @@ class CreateAffiliateLinks extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('affiliate_id');
-            $table->foreign('affiliate_id')->references('id')->on('affiliates');
+            $table->foreign('affiliate_id')->references('id')->on('affiliates')->onDelete('cascade');
             $table->string('code');
             //status_new = 1, status_finished - 2
             $table->integer('status');

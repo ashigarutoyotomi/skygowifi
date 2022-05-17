@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\AffiliateLink;
-use App\Domains\AffiliateLinks\Actions\AffiliateLinkAction;
+namespace App\Http\Controllers\Affiliate\AffiliateLink;
+use App\Domains\Affiliates\Actions\AffiliateLinkAction;
 use App\Domains\Affiliates\DTO\AffiliateDTO\UpdateAffiliateData;
 use Illuminate\Support\Facades\DB;
-use App\Domains\AffiliateLinks\Gateways\AffiliateLinkGateway;
-use App\Domains\AffiliateLinks\DTO\AffiliateLinkDTO\CreateAffiliateLinkData;
-use App\Domains\Affiliate\Models\AffiliateLink;
+use App\Domains\Affiliates\Gateways\AffiliateLinkGateway;
+use App\Domains\Affiliates\DTO\AffiliateLinkDTO\CreateAffiliateLinkData;
+use App\Domains\AffiliateLink\Models\AffiliateLink;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
