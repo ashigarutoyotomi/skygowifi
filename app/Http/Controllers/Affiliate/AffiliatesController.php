@@ -34,8 +34,7 @@ class AffiliatesController extends Controller
         if ($keywords) {
             $gateway->setSearch($keywords, ['first_name','last_name','email']);
         }
-        $affiliates = $gateway->all();
-        return $affiliates;
+        return $gateway->paginate(20)->all();
     }
 
     public function store(CreateAffiliateRequest $request)

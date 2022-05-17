@@ -34,6 +34,10 @@ class DeviceGateway
         if(count($this->filters)){
             $query = $this->appendFilters($query);
         }
+        
+        if ($this->paginate) {
+            return $query->paginate($this->paginate);
+        }
         return $query->get(); 
     }
 
