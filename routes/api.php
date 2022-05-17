@@ -10,7 +10,7 @@ use App\Http\Controllers\Country\CountriesController;
 use App\Http\Controllers\User\UsersController;
 use App\Http\Controllers\Device\DevicesController;
 use App\Http\Controllers\City\CitiesController;
-use App\Http\Controllers\Affiliate\AffiliateLink\AffiliateLinksController;
+use App\Http\Controllers\Affiliate\AffiliateLinksController;
 /* |-------------------------------------------------------------------------- | API Routes |-------------------------------------------------------------------------- | | Here is where you can register API routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | is assigned the "api" middleware group. Enjoy building your API! | */
 
 Route::post("/login", [AuthController::class, "login"]);

@@ -6,7 +6,6 @@ use App\Domains\Affiliates\DTO\AffiliateDTO\UpdateAffiliateData;
 use Illuminate\Support\Facades\DB;
 use App\Domains\Affiliates\Gateways\AffiliateLinkGateway;
 use App\Domains\Affiliates\DTO\AffiliateLinkDTO\CreateAffiliateLinkData;
-use App\Domains\AffiliateLink\Models\AffiliateLink;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
