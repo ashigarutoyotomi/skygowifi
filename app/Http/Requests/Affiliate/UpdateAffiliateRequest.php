@@ -25,10 +25,10 @@ class UpdateAffiliateRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'nullable|string',
-            'last_name' => 'nullable|string',
-            'email' => 'nullable|string',
-            'password'=>['nullable','string',Password::min(8)->letters()->mixedCase()->numbers()],
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|string',
+            'password'=>['required','string',Password::min(8)->letters()->mixedCase()->numbers()],
         ];
     }
     public function messages (){
