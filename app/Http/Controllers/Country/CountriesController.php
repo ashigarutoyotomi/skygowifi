@@ -26,8 +26,7 @@ class CountriesController extends Controller
         if($keywords){
                 $gateway->setSearch($keywords,['name']); 
         } 
-        $country = $gateway->all();
-        return $country;
+        return $gateway->paginate(20)->all();
     }
     public function edit($country_id)
     {

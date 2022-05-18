@@ -20,8 +20,8 @@ class CouponsController extends Controller
         if(!empty($filters)){
                 $gateway->setFilters($filters);
         }        
-        $coupons = $gateway->all();
-        return $coupons;
+        ;
+        return $gateway->paginate(20)->all();
     }
     public function edit($coupon_id)
     {

@@ -24,8 +24,7 @@ class AddressesController extends Controller
         if($keywords){
                 $gateway->setSearch($keywords,['text']); 
         } 
-        $addresses = $gateway->all();
-        return $addresses;
+        return $gateway->paginate(20)->all();
     }
     public function edit($address_id)
     {
