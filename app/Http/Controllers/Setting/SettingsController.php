@@ -7,7 +7,7 @@ use App\Domains\Settings\DTO\SettingDTO\UpdateSettingData;
 use App\Domains\Settings\Actions\SettingAction;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateSettingRequest;
+use App\Http\Requests\Setting\UpdateSettingRequest;
 
 class SettingsController extends Controller
 {

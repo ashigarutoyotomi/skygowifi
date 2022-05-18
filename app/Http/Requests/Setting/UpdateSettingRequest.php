@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
-use Illuminate\Validation\Rules\Password;
+namespace App\Http\Requests\Setting;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAffiliateLinkRequest extends FormRequest
+class UpdateSettingRequest extends FormRequest
 {
     /**
-     * Determine if the Affiliate is authorized to make this request.
+     * Determine if the Setting is authorized to make this request.
      *
      * @return bool
      */
@@ -25,7 +24,8 @@ class CreateAffiliateLinkRequest extends FormRequest
     public function rules()
     {
         return [
-            'affiliate_id' => 'required|integer',
+            'value' => 'required|string',
+            'key' => 'required|string',            
         ];
-    }
+    }       
 }

@@ -4,7 +4,7 @@ namespace App\Domains\AffiliateLinks\DTO\AffiliateLinkDTO;
 use App\Domains\AffiliateLinks\Models\AffiliateLink;
 use App\Domains\Affiliates\Models\Affiliate;
 use Illuminate\Support\Str;
-use App\Http\Requests\CreateAffiliateLinkRequest;
+use App\Http\Requests\AffiliateLink\CreateAffiliateLinkRequest;
 use Spatie\DataTransferObject\DataTransferObject;
 class CreateAffiliateLinkData extends DataTransferObject
 {

@@ -11,9 +11,10 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\CreateAffiliateRequest;
-use App\Http\Requests\UpdateAffiliateRequest;
 use App\Domains\Affiliates\Models\Affiliate;
+use App\Http\Requests\Affiliate\CreateAffiliateRequest;
+use App\Http\Requests\Affiliate\UpdateAffiliateRequest;
+
 class AffiliatesController extends Controller
 {
     /**
