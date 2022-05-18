@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domains\Affiliates\Gateways;
+namespace App\Domains\Affiliate\Gateways;
 
-use App\Domains\Affiliates\Models\AffiliateLink;
+use App\Domains\Affiliate\Models\Affiliate;
 use App\Traits\BasicGatewaysTrait;
 
-class AffiliateLinkGateway
+class AffiliateGateway
 {
     use BasicGatewaysTrait;
     /**
@@ -27,7 +27,7 @@ class AffiliateLinkGateway
     }
     
     public function all(){        
-        $query = AffiliateLink::query();        
+        $query = Affiliate::query();        
         if ($this->search['keywords'] && count($this->search['columns'])) {
             $this->appendSearch($query);
         }
@@ -39,10 +39,10 @@ class AffiliateLinkGateway
     }
 
     public function edit($id){
-        $affiliate = AffiliateLink::find($id);
+        $affiliate = Affiliate::find($id);
         return $affiliate;
     }
     public function find($id){
-        return AffiliateLink::find($id);
+        return Affiliate::find($id);
     }
 }

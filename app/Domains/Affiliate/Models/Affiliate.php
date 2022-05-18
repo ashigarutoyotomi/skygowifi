@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Affiliates\Models;
+namespace App\Domains\Affiliate\Models;
 
 use Illuminate\Database\Eloquent\Model;
 class Affiliate extends Model

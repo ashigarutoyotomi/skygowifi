@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domains\Affiliates\Actions;
+namespace App\Domains\Affiliate\Actions;
 
 use Illuminate\Support\Facades\Hash;
-use App\Domains\Affiliates\DTO\AffiliateDTO\CreateAffiliateData;
-use App\Domains\Affiliates\Models\Affiliate;
-use App\Domains\Affiliates\DTO\AffiliateDTO\UpdateAffiliateData;
+use App\Domains\Affiliate\DTO\AffiliateDTO\CreateAffiliateData;
+use App\Domains\Affiliate\Models\Affiliate;
+use App\Domains\Affiliate\DTO\AffiliateDTO\UpdateAffiliateData;
 
 class AffiliateAction
 {

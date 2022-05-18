@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Affiliates\DTO\AffiliateDTO;
+namespace App\Domains\Affiliate\DTO\AffiliateDTO;
 
 use App\Http\Requests\CreateAffiliateRequest;
 use Spatie\DataTransferObject\DataTransferObject;

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Affiliate;
 
-use App\Domains\Affiliates\Gateways\AffiliateGateway;
-use App\Domains\Affiliates\DTO\AffiliateDTO\UpdateAffiliateData;
+use App\Domains\Affiliate\Gateways\AffiliateGateway;
+use App\Domains\Affiliate\DTO\AffiliateDTO\UpdateAffiliateData;
 use Illuminate\Support\Facades\DB;
-use App\Domains\Affiliates\Actions\AffiliateAction;
-use App\Domains\Affiliates\DTO\AffiliateDTO\CreateAffiliateData;
+use App\Domains\Affiliate\Actions\AffiliateAction;
+use App\Domains\Affiliate\DTO\AffiliateDTO\CreateAffiliateData;
 use App\Domains\Affiliate\Models\Affiliate;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;

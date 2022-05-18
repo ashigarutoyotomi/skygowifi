@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Domains\Affiliates\DTO\AffiliateLinkDTO;
-use App\Domains\Affiliates\Models\AffiliateLink;
+namespace App\Domains\Affiliate\DTO\AffiliateLinkDTO;
+use App\Domains\Affiliate\Models\AffiliateLink;
 use Illuminate\Support\Str;
 use App\Http\Requests\CreateAffiliateLinkRequest;
 use Spatie\DataTransferObject\DataTransferObject;
