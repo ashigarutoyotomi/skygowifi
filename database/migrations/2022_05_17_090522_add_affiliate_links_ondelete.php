@@ -14,7 +14,7 @@ class AddAffiliateLinksOndelete extends Migration
     public function up()
     {
         Schema::table('affiliate_links', function (Blueprint $table) {
-            $table->foreign('affiliate_id')->references('id')->on('affiliates')->onDelete('cascade');
+            $table->foreign('affiliate_id')->references('id')->on('affiliates')->cascadeOnDelete();
         });
     }
 
