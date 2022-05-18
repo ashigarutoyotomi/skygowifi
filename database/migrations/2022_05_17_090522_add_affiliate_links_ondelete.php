@@ -14,11 +14,12 @@ class AddAffiliateLinksOndelete extends Migration
      */
     public function up()
     {
+        // Schema::table('affiliate_links', function (Blueprint $table) {
+        //     $table->dropForeign(['affiliate_id']);
+        // });
         Schema::table('affiliate_links', function (Blueprint $table) {
             $table->dropForeign(['affiliate_id']);
-        });
-        Schema::table('affiliate_links', function (Blueprint $table) {
-            $table->foreignId('affiliate_id')->references('id')->on('affiliates')->cascadeOnDelete();
+            $table->foreign('affiliate_id')->references('id')->on('affiliates')->cascadeOnDelete();
         });
     }
 
@@ -33,7 +34,7 @@ class AddAffiliateLinksOndelete extends Migration
             $table->dropForeign(['affiliate_id']);
         });
         Schema::table('affiliate_links', function (Blueprint $table) {
-            $table->foreignId('affiliate_id')->references('id')->on('affiliates');
+            $table->foreign('affiliate_id')->references('id')->on('affiliates');
         });        
     }
 }
