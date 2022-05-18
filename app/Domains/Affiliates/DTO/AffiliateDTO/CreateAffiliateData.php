@@ -2,7 +2,7 @@
 
 namespace App\Domains\Affiliates\DTO\AffiliateDTO;
 
-use App\Http\Requests\CreateAffiliateRequest;
+use App\Http\Requests\Affiliate\CreateAffiliateRequest;
 use Spatie\DataTransferObject\DataTransferObject;
 class CreateAffiliateData extends DataTransferObject
 {
