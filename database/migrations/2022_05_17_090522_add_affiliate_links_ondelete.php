@@ -25,6 +25,8 @@ class AddAffiliateLinksOndelete extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('affiliate_links');
+        Schema::create('affiliate_links', function (Blueprint $table) {
+            $table->dropForeign('affiliates_id_foreign');
+        });       
     }
 }
