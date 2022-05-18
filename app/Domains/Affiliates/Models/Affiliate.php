@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Domains\Affiliates\Models;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 class Affiliate extends Model
 {
-
+    use HasApiTokens, HasFactory, Notifiable;
     /**
      * the attributes are mass assignable.
      *
