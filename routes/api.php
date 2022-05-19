@@ -18,7 +18,7 @@ Route::post("/login", [AuthController::class , "login"]);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class , "me"]);
     Route::get('/logout', [AuthController::class , 'logout']);
- 
+
     //devices
     Route::group(['prefix' => '/devices'], function () {
         Route::get('/', [DevicesController::class , 'index']);
@@ -29,10 +29,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}/update', [DevicesController::class , "update"]);
         Route::delete('/{id}/delete', [DevicesController::class , 'delete']);
     });
-    //users crud
 
+    //users crud
     Route::group(['prefix' => '/users'], function () {
         Route::get('/', [UsersController::class , 'index']);
+        Route::get('/create', [UsersController::class , 'create']);
         Route::post('/store', [UsersController::class , 'store']);
         Route::get('/{id}/show', [UsersController::class , 'show']);
         Route::get('/{id}/edit', [UsersController::class , 'edit']);

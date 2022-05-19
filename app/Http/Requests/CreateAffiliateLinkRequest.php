@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAffiliateLinkRequest extends FormRequest
+class   CreateAffiliateLinkRequest extends FormRequest
 {
     /**
      * Determine if the Affiliate is authorized to make this request.
@@ -21,7 +21,7 @@ class CreateAffiliateLinkRequest extends FormRequest
      *
      * @return array
      */
-    
+
     public function rules()
     {
         return [

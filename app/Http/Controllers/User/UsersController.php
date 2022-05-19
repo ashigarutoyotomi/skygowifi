@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 use App\Domains\User\DTO\UserDTO\UpdateUserData;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Domains\User\Actions\UserAction;
 use App\Domains\User\DTO\UserDTO\CreateUserData;
@@ -37,6 +38,66 @@ class UsersController extends Controller
         }
 
         return $gateway->paginate(20)->all();
+    }
+
+    public function create()
+    {
+        $user = Auth::user();
+
+        $fields = [
+            'first_name' => [
+                'key' => 'first_name',
+                'title' => "First name",
+                'type' => "text",
+                'value' => '',
+            ],
+            'last_name' => [
+                'key' => 'last_name',
+                'title' => "Last name",
+                'type' => "text",
+                'value' => '',
+            ],
+            'email' => [
+                'key' => 'email',
+                'title' => "Email",
+                'type' => "email",
+                'value' => '',
+            ],
+            'role' => [
+                'key' => 'role',
+                'title' => "Role",
+                'type' => "select",
+                'options' => [
+                    ['id' => User::USER_ROLE_USER, 'name' => 'User'],
+                    ['id' => User::USER_ROLE_DEALER, 'name' => 'Dealer'],
+                ],
+                'value' => '',
+            ],
+            'address' => [
+                'key' => 'address',
+                'title' => "Address",
+                'type' => "text",
+                'value' => '',
+            ],
+            'phone_number' => [
+                'key' => 'phone_number',
+                'title' => "Phone number",
+                'type' => "text",
+                'value' => '',
+            ],
+            'password' => [
+                'key' => 'password',
+                'title' => "Password",
+                'type' => "password",
+                'value' => '',
+            ],
+        ];
+
+        if ($user->role === User::USER_ROLE_SUPERADMIN) {
+            $fields['role']['options'][] = ['id' => User::USER_ROLE_ADMIN, 'name' => 'Admin'];
+        }
+
+        return $fields;
     }
 
     public function store(CreateUserRequest $request)

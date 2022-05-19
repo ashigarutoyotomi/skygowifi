@@ -28,11 +28,29 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
+        $navItems = [
+            'home' => [
+                'path' => "/",
+                'icon' => "house-chimney",
+                'label' => "Home",
+                'routeName' => "Home",
+                'active' => true,
+            ]
+        ];
+
+        if ($user->role === User::USER_ROLE_SUPERADMIN) {
+            $navItems['users'] = [
+                'path' => "/users",
+                'icon' => "user-group",
+                'label' => "Users",
+                'routeName' => "Users",
+                'active' => false,
+            ];
+        }
+
         return [
-            'email' => $user->email,
-            'first_name' => $user->first_name,
-            'last_name'=>$user->last_name,
-            'id' => $user->id,
+            'user' => $user,
+            'navs' => $navItems,
         ];
     }
 
