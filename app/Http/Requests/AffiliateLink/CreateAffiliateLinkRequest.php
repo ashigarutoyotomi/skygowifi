@@ -26,6 +26,7 @@ class CreateAffiliateLinkRequest extends FormRequest
     {
         return [
             'affiliate_id' => 'required|integer',
+            'status' => 'required|integer'
         ];
     }
 }

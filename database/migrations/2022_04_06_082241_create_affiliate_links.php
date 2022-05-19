@@ -16,7 +16,7 @@ class CreateAffiliateLinks extends Migration
         Schema::create('affiliate_links', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('affiliate_id');
+            $table->unsignedBigInteger('affiliate_id');    
             $table->foreign('affiliate_id')->references('id')->on('affiliates');
             $table->string('code');
             //status_new = 1, status_finished - 2

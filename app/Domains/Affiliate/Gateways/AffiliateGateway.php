@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\Affiliates\Gateways;
+namespace App\Domains\Affiliate\Gateways;
 
-use App\Domains\Affiliates\Models\Affiliate;
+use App\Domains\Affiliate\Models\Affiliate;
 use App\Traits\BasicGatewaysTrait;
 
 class AffiliateGateway
