@@ -4,7 +4,7 @@ namespace App\Domains\User\DTO\UserDTO;
 
 use App\Http\Requests\UserRequest;
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\User\CreateUserRequest;
 class CreateUserData extends DataTransferObject
 {
     public string $first_name;

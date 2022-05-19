@@ -3,7 +3,7 @@
 namespace App\Domains\Affiliate\DTO\AffiliateDTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\UpdateAffiliateRequest;
+use App\Http\Requests\Affiliate\UpdateAffiliateRequest;
 class UpdateAffiliateData extends DataTransferObject
 {
     public string $first_name;

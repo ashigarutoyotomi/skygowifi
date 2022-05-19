@@ -82,12 +82,13 @@ Route::middleware('auth:sanctum')->group(function () {
     //affiliates crud
 
     Route::group(['prefix' => '/affiliates'], function () {
-        Route::get('/', [AffiliatesController::class, 'index']);
-        Route::post('/store', [AffiliatesController::class, 'store']);
-        Route::get('/{id}/show', [AffiliatesController::class, 'show']);
-        Route::get('/{id}/edit', [AffiliatesController::class, 'edit']);
-        Route::post('/{id}/update', [AffiliatesController::class, "update"]);
-        Route::delete('/{id}/delete', [AffiliatesController::class, 'delete']);
+        Route::get('/', [AffiliatesController::class , 'index']);
+        Route::post('/login', [AffiliatesController::class , 'login']);
+        Route::post('/store', [AffiliatesController::class , 'store']);
+        Route::get('/{id}/show', [AffiliatesController::class , 'show']);
+        Route::get('/{id}/edit', [AffiliatesController::class , 'edit']);
+        Route::post('/{id}/update', [AffiliatesController::class , "update"]);
+        Route::delete('/{id}/delete', [AffiliatesController::class , 'delete']);
     });
     //setting update
     Route::group(

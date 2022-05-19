@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Device;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-
-class CreateDeviceCsvRequest extends FormRequest
+class CreateDeviceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +25,15 @@ class CreateDeviceCsvRequest extends FormRequest
     public function rules()
     {
         return [
-            'csv' =>"required|file",
+            'serial_number'=>'required|string'
+            ,
             'address_id'=>'required|integer',
-        ]  ;
+        ];                                                                                                                                  
     }
-    public function messages()
-    {
+    public function messages (){
         return [
             'address_id.required'=>'Address id cannot be null',
-            'csv.required'=>'csv file is required to upload',
+            'serial_number.required'=>'serial number needed',
         ];
     }
 }

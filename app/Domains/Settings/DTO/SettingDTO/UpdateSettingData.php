@@ -3,7 +3,7 @@
 namespace App\Domains\Settings\DTO\SettingDTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\UpdateSettingRequest;
+use App\Http\Requests\Setting\UpdateSettingRequest;
 class UpdateSettingData extends DataTransferObject
 {
     public string $key;

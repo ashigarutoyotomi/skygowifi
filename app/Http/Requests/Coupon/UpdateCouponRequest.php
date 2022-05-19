@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Coupon\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateDeviceRequest extends FormRequest
+class UpdateCouponRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class UpdateDeviceRequest extends FormRequest
     public function rules()
     {
         return [
-            'serial_number'=>'required|string'
+            'flat_amount_off'=>'required|integer'
             ,
-            'address_id' =>"required|integer"
+            'dealer_id' =>"nullable|integer",
+            'percentage_off' =>"required|integer"
         ];
     }
 }

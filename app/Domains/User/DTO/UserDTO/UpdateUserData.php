@@ -3,7 +3,7 @@
 namespace App\Domains\User\DTO\UserDTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 class UpdateUserData extends DataTransferObject
 {
     public string $first_name;

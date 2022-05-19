@@ -3,7 +3,7 @@
 namespace App\Domains\Device\DTO\DeviceDTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\UpdateDeviceRequest;
+use App\Http\Requests\Device\UpdateDeviceRequest;
 
 class UpdateDeviceData extends DataTransferObject
 {

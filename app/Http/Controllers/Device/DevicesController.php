@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Device;
 use App\Domains\Device\Actions\DeviceAction;
 use App\Domains\Device\DTO\DeviceDTO\CreateDeviceData;
 use App\Domains\Device\DTO\DeviceDTO\CreateDeviceCsvData;
-use App\Http\Requests\UpdateDeviceRequest;
+use App\Http\Requests\Device\UpdateDeviceRequest;
 use App\Domains\Device\Gateways\DeviceGateway;
 use App\Domains\Device\Models\Device;
-use App\Http\Requests\CreateDeviceRequest;
-use App\Http\Requests\CreateDeviceCsvRequest;
+use App\Http\Requests\Device\CreateDeviceRequest;
+use App\Http\Requests\Device\CreateDeviceCsvRequest;
 use Illuminate\Http\Request;
 use App\Domains\Device\DTO\DeviceDTO\UpdateDeviceData;
 use Illuminate\Support\Facades\Auth;
@@ -20,17 +20,19 @@ class DevicesController extends Controller
     public function index(Request $request)
     {
         $gateway = new DeviceGateway();
-        
+
         $filters = json_decode($request->get('filters'), true);
+
         if (!empty($filters)) {
             $gateway->setFilters($filters);
         }
-        $keywords =$request->get('keywords');
+
+        $keywords = $request->get('keywords');
+
         if ($keywords) {
             $gateway->setSearch($keywords, ['serial_number']);
         }
-        $devices = $gateway->all();
-        return $devices;
+        return $gateway->paginate(20)->all();
     }
     public function edit($device_id)
     {
@@ -51,14 +53,14 @@ class DevicesController extends Controller
     {
         if ($request->file('csv')->isValid()) {
             $devices = [];
-            if ($request->csv->getClientOriginalExtension()!='csv') {
+            if ($request->csv->getClientOriginalExtension() != 'csv') {
                 abort(403, 'File extension must be csv');
             }
-            $path = $request->csv->storeAs('csv', md5(time()).'csv');
-            $handle = fopen(base_path('storage/app/'.$path), 'r');
+            $path = $request->csv->storeAs('csv', md5(time()) . 'csv');
+            $handle = fopen(base_path('storage/app/' . $path), 'r');
             $i = 0;
             while (($row = fgetcsv($handle))) {
-                if ($i ==0) {
+                if ($i == 0) {
                     $i++;
                     continue;
                 }
@@ -66,13 +68,13 @@ class DevicesController extends Controller
                 $device = Device::where('serial_number', $row[0])->first();
 
                 $data = new CreateDeviceData([
-                    'address_id' =>$request->address_id,
-                    'creator_id'=>Auth::user()->id,
-                    'serial_number'=>$row[0]
+                    'address_id' => $request->address_id,
+                    'creator_id' => Auth::user()->id,
+                    'serial_number' => $row[0]
                 ]);
-                
+
                 if (!(bool)$device) {
-                    $devices[]=(new DeviceAction)->create($data);
+                    $devices[] = (new DeviceAction)->create($data);
                 }
             }
             return $devices;
