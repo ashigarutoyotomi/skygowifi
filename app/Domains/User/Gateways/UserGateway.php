@@ -49,7 +49,7 @@ class UserGateway
         return $user;
     }
 
-    public function find($id){
+    public static function find($id){
         return User::find($id);
     }
 }

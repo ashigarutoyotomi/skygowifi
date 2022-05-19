@@ -1,30 +1,25 @@
 <?php
 
-namespace App\Domains\User\DTO\UserDTO;
+namespace App\Domains\Affiliate\DTO\AffiliateDTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\User\UpdateUserRequest;
-class UpdateUserData extends DataTransferObject
+use App\Http\Requests\Affiliate\UpdateAffiliateRequest;
+class UpdateAffiliateData extends DataTransferObject
 {
     public string $first_name;
     public string $email;
     public string $last_name;
-    public int $role;
-    public ?string $address;
-    public string $phone_number;
     public ?string $password;
+    public int $id;
 
     public static function fromRequest(
-    UpdateUserRequest $request) : UpdateUserData {
+    UpdateAffiliateRequest $request,$affiliateId) : UpdateAffiliateData {
     $data = [
         'first_name' => $request->get('first_name'),
         'last_name' => $request->get('last_name'),
         'email'=>$request->get('email'),
-        'phone_number'=>$request->get('phone_number'),
-        'address'=>$request->get('address'),
-        'role'=>$request->get('role'),
         'password'=>$request->get('password'),
-        'role'=>(int)$request->get('role'),
+        'id'=>(int)$affiliateId,
     ];        
     return new self($data);
 }

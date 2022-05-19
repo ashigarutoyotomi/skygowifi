@@ -24,8 +24,7 @@ class CitiesController extends Controller
         if($keywords){
                 $gateway->setSearch($keywords,['name']); 
         } 
-        $cities = $gateway->all();
-        return $cities;
+        return $gateway->paginate(20)->all();
     }
     public function edit($city_id)
     {

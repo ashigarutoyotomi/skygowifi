@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Domains\Device\Gateways;
+namespace App\Domains\Affiliate\Gateways;
 
-use App\Domains\Device\Models\Device;
+use App\Domains\Affiliate\Models\Affiliate;
 use App\Traits\BasicGatewaysTrait;
 
-class DeviceGateway
+class AffiliateGateway
 {
     use BasicGatewaysTrait;
     /**
-     * get devices by set filters
+     * get users by set filters
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
@@ -25,8 +25,9 @@ class DeviceGateway
 
         return $query;
     }
+    
     public function all(){        
-        $query = Device::query();        
+        $query = Affiliate::query();        
         if ($this->search['keywords'] && count($this->search['columns'])) {
             $this->appendSearch($query);
         }
@@ -34,7 +35,6 @@ class DeviceGateway
         if(count($this->filters)){
             $query = $this->appendFilters($query);
         }
-        
         if ($this->paginate) {
             return $query->paginate($this->paginate);
         }
@@ -42,10 +42,10 @@ class DeviceGateway
     }
 
     public function edit($id){
-        $device = Device::find($id);
-        return $device;
+        $affiliate = Affiliate::find($id);
+        return $affiliate;
     }
     public function find($id){
-        return Device::find($id);
+        return Affiliate::find($id);
     }
 }

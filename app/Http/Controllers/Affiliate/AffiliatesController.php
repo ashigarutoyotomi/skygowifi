@@ -1,19 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Affiliate;
-
-use App\Domains\Affiliates\Gateways\AffiliateGateway;
-use App\Domains\Affiliates\DTO\AffiliateDTO\UpdateAffiliateData;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Domains\Affiliate\Gateways\AffiliateGateway;
+use App\Domains\Affiliate\DTO\AffiliateDTO\UpdateAffiliateData;
 use Illuminate\Support\Facades\DB;
-use App\Domains\Affiliates\Actions\AffiliateAction;
-use App\Domains\Affiliates\DTO\AffiliateDTO\CreateAffiliateData;
-use App\Domains\Affiliate\Models\Affiliate;
+use App\Domains\Affiliate\Actions\AffiliateAction;
+use App\Domains\Affiliate\DTO\AffiliateDTO\CreateAffiliateData;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\CreateAffiliateRequest;
-use App\Http\Requests\UpdateAffiliateRequest;
+use App\Domains\Affiliate\Models\Affiliate;
+use App\Http\Requests\Affiliate\CreateAffiliateRequest;
+use App\Http\Requests\Affiliate\UpdateAffiliateRequest;
 
 class AffiliatesController extends Controller
 {
@@ -25,17 +25,16 @@ class AffiliatesController extends Controller
     public function index(Request $request)
     {
         $gateway = new AffiliateGateway();
-        
+
         $filters = json_decode($request->get('filters'), true);
         if (!empty($filters)) {
             $gateway->setFilters($filters);
         }
-        $keywords =$request->get('keywords');
+        $keywords = $request->get('keywords');
         if ($keywords) {
-            $gateway->setSearch($keywords, ['first_name','last_name','email']);
+            $gateway->setSearch($keywords, ['first_name', 'last_name', 'email']);
         }
-        $affiliates = $gateway->all();
-        return $affiliates;
+        return $gateway->paginate(20)->all();
     }
 
     public function store(CreateAffiliateRequest $request)
@@ -65,7 +64,7 @@ class AffiliatesController extends Controller
     {
         $affiliate = (new AffiliateAction)->find($affiliateId);
 
-        $data = UpdateAffiliateData::fromRequest($request,$affiliateId);
+        $data = UpdateAffiliateData::fromRequest($request, $affiliateId);
 
         $affiliate = (new AffiliateAction)->update($data);
 
@@ -74,7 +73,34 @@ class AffiliatesController extends Controller
 
     public function delete($affiliateId)
     {
-        $affiliate = ( new AffiliateAction)->delete($affiliateId);
+        $affiliate = (new AffiliateAction)->delete($affiliateId);
         return $affiliate;
+    }
+    public function login(LoginRequest $request)
+    {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        $affiliate = Affiliate::where(
+            'email',
+            $credentials['email']
+        )->first();
+        abort_unless((bool)$affiliate, 404, 'User not found');
+        $match = Hash::check($credentials['password'], $affiliate->password);
+        if ($affiliate && $match) {
+            $token = $affiliate->createToken('access-token')->plainTextToken;
+
+            // response
+            return response([
+                'user' => $affiliate,
+                'token' => $token,
+            ]);
+        }
+
+        return response([
+            'message' => 'These credentials do not match our records.',
+        ], 401);
     }
 }
