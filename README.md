@@ -1,4 +1,4 @@
-project i took part in global travel telecom. i have been allowed to show this as my portfolio without changing the code or using it for commercial purposes
+project i took part in global travel telecom. i have been allowed to show this as my portfolio without changing the code or using it for commercial purposes. all the code belongs to global travel telecom! watch it only - no using in anywhere
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
